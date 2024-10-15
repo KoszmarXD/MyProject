@@ -42,6 +42,7 @@ public class GridCell : MonoBehaviour
 
     private Renderer rend;
     private Material originalMaterial;
+    internal object fCost;
 
     void Awake()
     {

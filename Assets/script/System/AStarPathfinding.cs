@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class AStarPathfinding : MonoBehaviour
         }
     }
 
-    public List<GridCell> FindPath(Vector2Int startPos, Vector2Int targetPos)
+    public (List<GridCell> path, float totalCost) FindPath(Vector2Int startPos, Vector2Int targetPos)
     {
         GridCell startCell = gridManager.GetGridCell(startPos);
         GridCell targetCell = gridManager.GetGridCell(targetPos);
@@ -23,19 +24,19 @@ public class AStarPathfinding : MonoBehaviour
         if (startCell == null || targetCell == null)
         {
             Debug.LogError("起點或終點格子為 null！");
-            return null;
+            return (null, 0f);
         }
 
         if (!targetCell.isWalkable)
         {
             Debug.LogError("終點格子不可行走！");
-            return null;
+            return (null, 0f);
         }
 
         List<Node> openList = new List<Node>();
         HashSet<Node> closedList = new HashSet<Node>();
 
-        Node startNode = new Node(startCell, null, 0, GetHeuristic(startCell, targetCell));
+        Node startNode = new Node(startCell, null, 0f, GetHeuristic(startCell, targetCell));
         openList.Add(startNode);
 
         while (openList.Count > 0)
@@ -49,7 +50,10 @@ public class AStarPathfinding : MonoBehaviour
             // 如果到達終點，重建路徑
             if (currentNode.gridCell == targetCell)
             {
-                return ReconstructPath(currentNode);
+                Debug.Log("成功找到路徑！");
+                List<GridCell> path = ReconstructPath(currentNode);
+                float totalCost = currentNode.gCost;
+                return (path, totalCost);
             }
 
             foreach (GridCell neighbor in gridManager.GetNeighbors(currentNode.gridCell))
@@ -66,18 +70,20 @@ public class AStarPathfinding : MonoBehaviour
                 {
                     neighborNode = new Node(neighbor, currentNode, tentativeGCost, GetHeuristic(neighbor, targetCell));
                     openList.Add(neighborNode);
+                    Debug.Log($"添加到開放列表: {neighbor.gameObject.name}，fCost: {neighborNode.fCost}");
                 }
                 else if (tentativeGCost < neighborNode.gCost)
                 {
                     neighborNode.gCost = tentativeGCost;
                     neighborNode.parent = currentNode;
+                    Debug.Log($"更新節點: {neighbor.gameObject.name}，新的 fCost: {neighborNode.fCost}");
                 }
             }
         }
 
         // 無法找到路徑
         Debug.LogWarning("無法找到從起點到終點的路徑！");
-        return null;
+        return (null, 0f);
     }
 
     private List<GridCell> ReconstructPath(Node endNode)

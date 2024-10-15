@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class GridManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GridManager : MonoBehaviour
     private GridCell[,] gridCells;
     private int width = 0;
     private int height = 0;
+    private object maxCost;
 
     void Start()
     {
@@ -99,7 +101,20 @@ public class GridManager : MonoBehaviour
     {
         if (position.x >= 0 && position.x < width && position.y >= 0 && position.y < height)
         {
-            return gridCells[position.x, position.y];
+            GridCell cell = gridCells[position.x, position.y];
+            if (cell != null)
+            {
+                Debug.Log($"取得 GridCell: {cell.gameObject.name} at ({position.x}, {position.y})");
+                return cell;
+            }
+            else
+            {
+                Debug.LogWarning($"GridCell 在 ({position.x}, {position.y}) 為 null！");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"GridCell 位置 ({position.x}, {position.y}) 超出範圍！");
         }
         return null;
     }
@@ -136,25 +151,38 @@ public class GridManager : MonoBehaviour
 
         return neighbors;
     }
-    public List<GridCell> GetAvailableCells(Vector2Int start, int range, bool isPlayerControlled)
+    // 獲取所有在移動範圍內且可達的 GridCell
+    public List<GridCell> GetAccessibleCells(Vector2Int start, int range)
     {
-        List<GridCell> available = new List<GridCell>();
-        // 使用廣度優先搜索或其他算法來計算可移動範圍
-        for (int x = start.x - range; x <= start.x + range; x++)
+        List<GridCell> accessible = new List<GridCell>();
+        AStarPathfinding aStar = FindObjectOfType<AStarPathfinding>();
+        if (aStar == null)
         {
-            for (int z = start.y - range; z <= start.y + range; z++)
+            Debug.LogError("AStarPathfinding 未在場景中找到！");
+            return accessible;
+        }
+
+        GridCell startCell = GetGridCell(start);
+        if (startCell == null)
+        {
+            Debug.LogError("起點格子為 null！");
+            return accessible;
+        }
+
+        // 遍歷所有可行走的格子，並檢查從起點到目標格子的總成本是否在範圍內
+        foreach (var cell in gridCells)
+        {
+            if (cell != null && cell.isWalkable)
             {
-                if (x >= 0 && x < width && z >= 0 && z < height)
+                var (path, totalCost) = aStar.FindPath(start, cell.gridPosition);
+                if (path != null && totalCost <= range)
                 {
-                    GridCell cell = gridCells[x, z];
-                    if (cell != null && cell.isWalkable)
-                    {
-                        available.Add(cell);
-                    }
+                    accessible.Add(cell);
                 }
             }
         }
-        return available;
+
+        return accessible;
     }
 
     // 獲取所有敵方棋子
@@ -197,5 +225,10 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    internal List<GridCell> GetAvailableCells(Vector2Int gridPosition, int movementRange, bool isPlayerControlled)
+    {
+        throw new NotImplementedException();
     }
 }

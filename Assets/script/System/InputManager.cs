@@ -75,7 +75,7 @@ public class InputManager : MonoBehaviour
                     GridCell cell = hit.collider.GetComponent<GridCell>();
                     if (cell != null)
                     {
-                        SelectCell(cell);
+                        SelectCell(cell, GetAStar());
                     }
                 }
             }
@@ -107,27 +107,33 @@ public class InputManager : MonoBehaviour
         DisplayAvailableMoves();
     }
 
-    private void SelectCell(GridCell cell)
+    private AStarPathfinding GetAStar()
+    {
+        return aStar;
+    }
+
+    private void SelectCell(GridCell cell, AStarPathfinding aStar)
     {
         if (selectedPiece != null && IsCellInRange(cell))
         {
             // 使用 A* 尋找路徑
             Vector2Int start = selectedPiece.gridPosition;
             Vector2Int target = cell.gridPosition;
-            List<GridCell> path = aStar.FindPath(start, target);
+            var (path, totalCost) = aStar.FindPath(start, target);
 
-            if (path != null && path.Count > 1)
+            if (path != null && path.Count > 1 && totalCost <= selectedPiece.movementRange)
             {
                 currentPath = path;
                 currentPathIndex = 1; // 路徑的第一個點是當前位置
                 isMoving = true;
-                Debug.Log("路徑已找到，開始移動棋子。");
+                Debug.Log($"路徑已找到，開始移動棋子，總成本: {totalCost}");
             }
             else
             {
-                Debug.Log("路徑未找到或目標已在當前位置。");
+                Debug.Log("路徑未找到或總成本超出移動範圍。");
             }
 
+            // 不立即取消選擇棋子，讓 selectedPiece 保持有效
         }
     }
 
@@ -159,20 +165,20 @@ public class InputManager : MonoBehaviour
     {
         if (selectedPiece != null)
         {
-            var availableCells = gridManager.GetAvailableCells(selectedPiece.gridPosition, selectedPiece.movementRange, selectedPiece.isPlayerControlled);
-            foreach (var cell in availableCells)
+            var accessibleCells = gridManager.GetAccessibleCells(selectedPiece.gridPosition, selectedPiece.movementRange);
+            foreach (var cell in accessibleCells)
             {
                 cell.Highlight(); // 使用 GridCell 的 Highlight 方法
                 highlightedCells.Add(cell); // 添加到高亮列表
             }
-            Debug.Log($"顯示 {availableCells.Count} 個可移動格子");
+            Debug.Log($"顯示 {accessibleCells.Count} 個可移動格子");
         }
     }
 
     private bool IsCellInRange(GridCell cell)
     {
-        var availableCells = gridManager.GetAvailableCells(selectedPiece.gridPosition, selectedPiece.movementRange, selectedPiece.isPlayerControlled);
-        return availableCells.Contains(cell);
+        var accessibleCells = gridManager.GetAccessibleCells(selectedPiece.gridPosition, selectedPiece.movementRange);
+        return accessibleCells.Contains(cell);
     }
 
     private void HandleMovement()
@@ -250,18 +256,25 @@ public class InputManager : MonoBehaviour
     {
         if (selectedPiece != null)
         {
-            if (selectedPiece is Warrior warrior)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                var enemy = warrior.DetectEnemy();
-                if (enemy != null)
+                // 嘗試攻擊
+                if (selectedPiece is Warrior warrior)
                 {
-                    warrior.Attack(enemy);
+                    var enemy = warrior.DetectEnemy();
+                    if (enemy != null)
+                    {
+                        warrior.Attack(enemy);
+                    }
+                    else
+                    {
+                        Debug.Log("沒有可攻擊的敵人");
+                    }
                 }
-                
-            }
-            else
-            {
-                Debug.LogWarning($"{selectedPiece.gameObject.name} 不是 Warrior，無法攻擊");
+                else
+                {
+                    Debug.LogWarning($"{selectedPiece.gameObject.name} 不是 Warrior，無法攻擊");
+                }
             }
         }
     }
