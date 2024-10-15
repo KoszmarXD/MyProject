@@ -94,6 +94,48 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    // 新增方法：獲取指定位置的 GridCell
+    public GridCell GetGridCell(Vector2Int position)
+    {
+        if (position.x >= 0 && position.x < width && position.y >= 0 && position.y < height)
+        {
+            return gridCells[position.x, position.y];
+        }
+        return null;
+    }
+
+    // 新增方法：獲取指定 GridCell 的鄰居
+    public List<GridCell> GetNeighbors(GridCell cell)
+    {
+        List<GridCell> neighbors = new List<GridCell>();
+
+        Vector2Int pos = cell.gridPosition;
+
+        // 8 方向的鄰居（可根據需要調整為 4 方向）
+        Vector2Int[] directions = new Vector2Int[]
+        {
+            new Vector2Int(0, 1), // 上
+            new Vector2Int(1, 0), // 右
+            new Vector2Int(0, -1), // 下
+            new Vector2Int(-1, 0), // 左
+            /*new Vector2Int(1, 1), // 右上
+            new Vector2Int(1, -1), // 右下
+            new Vector2Int(-1, -1), // 左下
+            new Vector2Int(-1, 1) // 左上*/
+        };
+
+        foreach (var dir in directions)
+        {
+            Vector2Int neighborPos = new Vector2Int(pos.x + dir.x, pos.y + dir.y);
+            GridCell neighbor = GetGridCell(neighborPos);
+            if (neighbor != null && neighbor.isWalkable)
+            {
+                neighbors.Add(neighbor);
+            }
+        }
+
+        return neighbors;
+    }
     public List<GridCell> GetAvailableCells(Vector2Int start, int range, bool isPlayerControlled)
     {
         List<GridCell> available = new List<GridCell>();

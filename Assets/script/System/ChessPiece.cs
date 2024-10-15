@@ -17,6 +17,13 @@ public abstract class ChessPiece : MonoBehaviour
         gridManager = FindObjectOfType<GridManager>();
     }
 
+    // 在棋子移動完成後更新 gridPosition
+    public void UpdateGridPosition(Vector2Int newPosition)
+    {
+        gridPosition = newPosition;
+        Debug.Log($"{gameObject.name} 的 gridPosition 更新為 ({newPosition.x}, {newPosition.y})");
+    }
+
     // 抽象方法，具體棋子需實現
     public abstract void TakeTurn();
     public virtual void ReceiveDamage(int damage)
