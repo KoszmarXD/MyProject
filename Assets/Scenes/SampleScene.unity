@@ -2443,7 +2443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce78d736d5e39fe4ea36e88b39ddc60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPosition: {x: 3, y: 0}
+  gridPosition: {x: 3, y: 1}
   isPlayerControlled: 1
   movementRange: 3
   attackRange: 1
@@ -4395,6 +4395,8 @@ MonoBehaviour:
   chessPieces:
   - {fileID: 188718389}
   - {fileID: 4065369043958187188}
+  width: 10
+  height: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5446,7 +5448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4569920694205498232, guid: dc4cb8edfc3338741aa66b75ac021157, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4569920694205498232, guid: dc4cb8edfc3338741aa66b75ac021157, type: 3}
       propertyPath: m_LocalRotation.w

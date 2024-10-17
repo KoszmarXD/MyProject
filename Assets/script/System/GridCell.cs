@@ -55,6 +55,10 @@ public class GridCell : MonoBehaviour
         SetMaterialBasedOnTerrain();
     }
 
+    void Start()
+    {
+        originalMaterial = GetComponent<Renderer>().material;
+    }
     // 根據地形類型設置原始顏色
     public void SetMaterialBasedOnTerrain()
     {

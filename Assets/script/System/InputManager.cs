@@ -123,10 +123,30 @@ public class InputManager : MonoBehaviour
 
             if (path != null && path.Count > 1 && totalCost <= selectedPiece.movementRange)
             {
-                currentPath = path;
-                currentPathIndex = 1; // 路徑的第一個點是當前位置
-                isMoving = true;
-                Debug.Log($"路徑已找到，開始移動棋子，總成本: {totalCost}");
+                // 確認路徑的所有格子都在棋盤範圍內
+                bool isValidPath = true;
+                foreach (var step in path)
+                {
+                    if (step.gridPosition.x < 0 || step.gridPosition.x >= gridManager.Width ||
+                        step.gridPosition.y < 0 || step.gridPosition.y >= gridManager.Height)
+                    {
+                        Debug.LogError($"路徑中的格子 ({step.gridPosition.x}, {step.gridPosition.y}) 超出範圍！");
+                        isValidPath = false;
+                        break;
+                    }
+                }
+
+                if (isValidPath)
+                {
+                    currentPath = path;
+                    currentPathIndex = 1; // 路徑的第一個點是當前位置
+                    isMoving = true;
+                    Debug.Log($"路徑已找到，開始移動棋子，總成本: {totalCost}");
+                }
+                else
+                {
+                    Debug.LogWarning("路徑包含無效的格子，移動取消。");
+                }
             }
             else
             {
@@ -223,8 +243,15 @@ public class InputManager : MonoBehaviour
                 currentPathIndex++;
 
                 // 更新棋子的 gridPosition
-                selectedPiece.UpdateGridPosition(targetCell.gridPosition);
-                Debug.Log($"{selectedPiece.gameObject.name} 的 gridPosition 更新為 ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
+                if (targetCell != null)
+                {
+                    selectedPiece.gridPosition = targetCell.gridPosition;
+                    Debug.Log($"{selectedPiece.gameObject.name} 的 gridPosition 更新為 ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
+                }
+                else
+                {
+                    Debug.LogError("targetCell 是 null，無法更新棋子的 gridPosition！");
+                }
 
                 if (currentPathIndex >= currentPath.Count)
                 {
