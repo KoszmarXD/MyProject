@@ -25,6 +25,10 @@ public class InputManager : MonoBehaviour
     private int currentPathIndex = 0;
     private bool isMoving = false;
 
+    public GameObject moveHighlightPrefab;  // 用於顯示移動範圍的 Prefab
+    public GameObject attackHighlightPrefab; // 用於顯示攻擊範圍的 Prefab
+
+    private List<GameObject> activeHighlights = new List<GameObject>(); // 儲存當前生成的高亮物件
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
@@ -131,13 +135,13 @@ public class InputManager : MonoBehaviour
                 rend.material.color = originalChessPieceColor;
                 Debug.Log($"{selectedPiece.gameObject.name} 顏色恢復為 {originalChessPieceColor}");
             }
-            // 恢復所有可移動格子的顏色
-            foreach (var cell in highlightedCells)
+            // 刪除所有生成的高亮物件
+            foreach (GameObject highlight in activeHighlights)
             {
-                cell.ResetMaterial();
+                Destroy(highlight);
             }
-            // 清空高亮格子列表
-            highlightedCells.Clear();
+            activeHighlights.Clear();
+
             selectedPiece = null;
             selectedCell = null;
         }
@@ -150,21 +154,22 @@ public class InputManager : MonoBehaviour
             var accessibleCells = gridManager.GetAccessibleCells(selectedPiece.gridPosition, selectedPiece.movementRange);
             foreach (var cell in accessibleCells)
             {
-                cell.HighlightAsMove(); // 使用 GridCell 的 Highlight 方法
-                highlightedCells.Add(cell); // 添加到高亮列表
+                // 調整生成高亮物件的位置，讓其稍微高於棋盤
+                Vector3 highlightPosition = cell.transform.position;
+                highlightPosition.y += 0.05f; // 調整 Y 軸位置，將其抬高一點
+
+                GameObject highlight = Instantiate(moveHighlightPrefab, highlightPosition, Quaternion.identity);
+                activeHighlights.Add(highlight);
             }
             Debug.Log($"顯示 {accessibleCells.Count} 個可移動格子");
         }
     }
 
-    void DisplayAttackRange(ChessPiece piece)
+    private void DisplayAttackRange(ChessPiece piece)
     {
         HashSet<GridCell> totalAttackRangeCells = new HashSet<GridCell>();
-
-        // 獲取棋子的所有可移動格子
         List<GridCell> moveRangeCells = gridManager.GetAccessibleCells(piece.gridPosition, piece.movementRange);
-
-        // 遍歷所有可移動格子 並從这些格子計算攻擊範圍
+        List<GridCell> attackRangeCells = gridManager.GetAttackRange(piece.gridPosition, piece.attackRange);
         foreach (GridCell moveCell in moveRangeCells)
         {
             List<GridCell> attackRangeFromMoveCell = gridManager.GetAttackRange(moveCell.gridPosition, piece.attackRange);
@@ -174,15 +179,17 @@ public class InputManager : MonoBehaviour
                 totalAttackRangeCells.Add(attackCell);
             }
         }
-
-        // 高亮顯示所有可能攻擊到的格子
+        // 確保攻擊範圍覆蓋到整個移動範圍
         foreach (GridCell attackCell in totalAttackRangeCells)
         {
-            attackCell.HighlightAsAttack();
-            highlightedCells.Add(attackCell); // 添加到高亮列表
+            // 調整生成高亮物件的位置，讓其稍微高於棋盤
+            Vector3 highlightPosition = attackCell.transform.position;
+            highlightPosition.y += 0.05f; // 調整 Y 軸位置，將其抬高一點
+
+            GameObject highlight = Instantiate(attackHighlightPrefab, highlightPosition, Quaternion.identity);
+            activeHighlights.Add(highlight);
         }
 
-        Debug.Log($"顯示 {totalAttackRangeCells.Count} 個攻擊範圍的格子");
     }
     private bool IsCellInRange(GridCell cell)
     {

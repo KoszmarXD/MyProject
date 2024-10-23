@@ -202,6 +202,7 @@ public class GridManager : MonoBehaviour
     {
         List<GridCell> attackRangeCells = new List<GridCell>();
 
+        // 簡單的範例邏輯，根據曼哈頓距離計算攻擊範圍
         for (int x = -attackRange; x <= attackRange; x++)
         {
             for (int y = -attackRange; y <= attackRange; y++)
@@ -210,7 +211,7 @@ public class GridManager : MonoBehaviour
                 if (Mathf.Abs(x) + Mathf.Abs(y) <= attackRange)
                 {
                     GridCell cell = GetGridCell(checkPos);
-                    if (cell != null)
+                    if (cell != null) // 根據需求加入額外條件
                     {
                         attackRangeCells.Add(cell);
                     }

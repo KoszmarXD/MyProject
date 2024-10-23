@@ -172,10 +172,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &38532651
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -296,10 +298,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &69208380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -420,10 +424,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &89142622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -544,10 +550,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &111037060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -667,6 +675,8 @@ MonoBehaviour:
   selectableLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  moveHighlightPrefab: {fileID: 7884647529832642053, guid: 9f4ffdf709f18f34da4c3d8f40ce6b11, type: 3}
+  attackHighlightPrefab: {fileID: 7884647529832642053, guid: e0e1e96128f3061458cba8916df5812d, type: 3}
 --- !u!1 &162849450
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,10 +726,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &162849453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -840,10 +852,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &165611337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -987,10 +1001,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &198339433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1111,10 +1127,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &222124966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1235,10 +1253,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &223955815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1359,10 +1379,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &231034472
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1483,10 +1505,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &252953275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1607,10 +1631,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &269385175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1731,10 +1757,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &269445785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1855,10 +1883,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &271322883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1979,10 +2009,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &278234988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2103,10 +2135,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &286061463
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2227,10 +2261,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &289794970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2351,10 +2387,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &303826600
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2498,10 +2536,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &366255845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2622,10 +2662,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &373444622
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2746,10 +2788,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &377016108
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2870,10 +2914,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &380246758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2994,10 +3040,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &428159104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3118,10 +3166,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &435718675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3242,10 +3292,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &436762689
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3366,10 +3418,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &440086602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3490,10 +3544,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &472304783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3614,10 +3670,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &472882085
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3738,10 +3796,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &513842483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3862,10 +3922,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &516862335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4017,10 +4079,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &571894549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4146,10 +4210,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &667948392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4270,10 +4336,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &668002720
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4538,10 +4606,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &706541492
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4662,10 +4732,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &781750824
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4786,10 +4858,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &800209401
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4992,10 +5066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &827556547
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5217,10 +5293,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &835293550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5341,10 +5419,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &848674269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5547,10 +5627,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &866547178
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5671,10 +5753,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &945667632
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5795,10 +5879,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &955251537
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6030,10 +6116,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &982269049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6154,10 +6242,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &984933111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6409,10 +6499,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1156612442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6533,10 +6625,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1160339077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6657,10 +6751,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1173823380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6781,10 +6877,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1178083239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6905,10 +7003,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1204279802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7029,10 +7129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1271897484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7153,10 +7255,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1279819225
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7277,10 +7381,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1296456435
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7401,10 +7507,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1297963046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7525,10 +7633,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1301544157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7649,10 +7759,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1308360530
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7773,10 +7885,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1317969459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7897,10 +8011,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1359320400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8021,10 +8137,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1385849042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8145,10 +8263,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1398763628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8269,10 +8389,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1408616923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8393,10 +8515,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1422971983
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8517,10 +8641,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1489496869
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8641,10 +8767,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1499202107
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8765,10 +8893,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1534608866
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8889,10 +9019,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1543494079
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9013,10 +9145,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1559031915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9137,10 +9271,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1577725719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9367,10 +9503,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1613873251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9491,10 +9629,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1620404371
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9615,10 +9755,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1642840974
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9739,10 +9881,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1644907836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9863,10 +10007,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1647096892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9987,10 +10133,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 1
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1650079693
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10111,10 +10259,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1665813145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10235,10 +10385,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1682488294
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10403,10 +10555,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1761209525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10527,10 +10681,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1773496114
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10651,10 +10807,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1786605537
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10775,10 +10933,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1790720519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10899,10 +11059,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 2
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1815308826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11023,10 +11185,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1818960496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11147,10 +11311,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1831812914
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11271,10 +11437,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1836994594
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11395,10 +11563,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1887038508
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11519,10 +11689,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 9
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1889229893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11643,10 +11815,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 1
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1917240505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11767,10 +11941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1932830843
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11891,10 +12067,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 8
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1944469047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12015,10 +12193,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1947370731
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12139,10 +12319,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 0
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1984707515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12263,10 +12445,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 6
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1988019597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12387,10 +12571,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 8
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1997063747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12511,10 +12697,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 7
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &1997064090
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12635,10 +12823,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 7
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &2006460417
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12759,10 +12949,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 4
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &2032551554
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12883,10 +13075,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 4
   zPosition: 3
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &2077700980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13007,10 +13201,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &2116860162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13199,10 +13395,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 5
   zPosition: 6
+  currentPiece: {fileID: 0}
   isWalkable: 1
   movementCost: 1
   terrainType: 0
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &2133926865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13323,10 +13521,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 2
   zPosition: 5
+  currentPiece: {fileID: 0}
   isWalkable: 0
   movementCost: 1
   terrainType: 1
   highlightMaterial: {fileID: 2100000, guid: 81f5ecd39709f4546a0c54b4b1b6924b, type: 2}
+  isHighlighted: 0
 --- !u!65 &2135988544
 BoxCollider:
   m_ObjectHideFlags: 0
