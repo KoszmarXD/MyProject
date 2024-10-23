@@ -28,6 +28,8 @@ public class GridCell : MonoBehaviour
         }
     }
 
+    public ChessPiece currentPiece;
+
     [Tooltip("是否可行走")]
     public bool isWalkable = true;
 
@@ -39,7 +41,7 @@ public class GridCell : MonoBehaviour
 
     [Tooltip("高亮材質")]
     public Material highlightMaterial; // 在 Inspector 中設置
-
+    public bool isHighlighted;
     private Renderer rend;
     private Material originalMaterial;
     internal object fCost;
@@ -85,17 +87,32 @@ public class GridCell : MonoBehaviour
     }
 
     // 高亮顯示格子
-    public void Highlight()
+    public void HighlightAsAttack()
+    {
+        // Set a material or color for attack range, e.g., red
+        Debug.Log($"Highlighting cell {gameObject.name} as attack range");
+        SetHighlightColor(Color.red);
+        isHighlighted = true;
+    }
+    public void HighlightAsMove()
     {
         if (highlightMaterial != null)
         {
             rend.material = highlightMaterial;
+            isHighlighted = true;
             Debug.Log($"{gameObject.name} 被高亮顯示");
         }
         else
         {
             Debug.LogWarning($"{gameObject.name} 沒有設置 Highlight Material！");
         }
+    }
+    
+    public void SetHighlightColor(Color color)
+    {
+        // Code to change material or color of the grid cell
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material.color = color;
     }
 
     // 重置格子的顏色
@@ -104,6 +121,7 @@ public class GridCell : MonoBehaviour
         if (originalMaterial != null)
         {
             rend.material = originalMaterial;
+            isHighlighted = false;
             Debug.Log($"{gameObject.name} 材質重置為 {originalMaterial.name}");
         }
         else
@@ -111,5 +129,4 @@ public class GridCell : MonoBehaviour
             Debug.LogWarning($"{gameObject.name} 原始材質為 null，無法重置！");
         }
     }
-    
 }

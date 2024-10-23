@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,17 +10,17 @@ public class InputManager : MonoBehaviour
     private GridCell selectedCell;
 
     private AStarPathfinding aStar;
-    public float moveSpeed = 5f; // ´Ñ¤l²¾°Ê³t«×
+    public float moveSpeed = 5f; // æ£‹å­ç§»å‹•é€Ÿåº¦
 
     public LayerMask selectableLayers;
 
-    // ¥Î©ó¦sÀx·í«e°ª«Gªº®æ¤l
+    // ç”¨æ–¼å­˜å„²ç•¶å‰é«˜äº®çš„æ ¼å­
     private List<GridCell> highlightedCells = new List<GridCell>();
 
-    // ¥Î©ó¦sÀx¿ï¤¤´Ñ¤lªº­ì©lÃC¦â
+    // ç”¨æ–¼å­˜å„²é¸ä¸­æ£‹å­çš„åŸå§‹é¡è‰²
     private Color originalChessPieceColor;
 
-    // ·í«e¸ô®|
+    // ç•¶å‰è·¯å¾‘
     private List<GridCell> currentPath = new List<GridCell>();
     private int currentPathIndex = 0;
     private bool isMoving = false;
@@ -29,24 +29,6 @@ public class InputManager : MonoBehaviour
     {
         gridManager = FindObjectOfType<GridManager>();
         aStar = FindObjectOfType<AStarPathfinding>();
-        if (gridManager == null)
-        {
-            Debug.LogError("GridManager ¥¼¦b³õ´º¤¤§ä¨ì¡I");
-        }
-        if (aStar == null)
-        {
-            Debug.LogError("AStarPathfinding ¥¼¦b³õ´º¤¤§ä¨ì¡I");
-        }
-
-        if (Camera.main == null)
-        {
-            Debug.LogError("Main Camera ¥¼³]¸m©Î¥¼§ä¨ì¡I");
-        }
-
-        if (EventSystem.current == null)
-        {
-            Debug.LogError("EventSystem ¥¼¦b³õ´º¤¤§ä¨ì¡I");
-        }
     }
 
     void Update()
@@ -61,10 +43,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject()))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.Log("µo®g®g½u");
+            Debug.Log("ç™¼å°„å°„ç·š");
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, selectableLayers))
             {
-                Debug.Log($"®g½uÀ»¤¤: {hit.collider.gameObject.name}");
+                Debug.Log($"å°„ç·šæ“Šä¸­: {hit.collider.gameObject.name}");
                 ChessPiece piece = hit.collider.GetComponent<ChessPiece>();
                 if (piece != null && piece.isPlayerControlled)
                 {
@@ -81,8 +63,8 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("®g½u¥¼À»¤¤¥ô¦óª«Åé");
-                DeselectCurrentPiece(); // ·íÂIÀ»ªÅ¥Õ³B®É¡A¨ú®ø¿ï¾Ü¨Ã²MªÅ°ª«G®æ¤l
+                Debug.Log("å°„ç·šæœªæ“Šä¸­ä»»ä½•ç‰©é«”");
+                DeselectCurrentPiece(); // ç•¶é»æ“Šç©ºç™½è™•æ™‚ï¼Œå–æ¶ˆé¸æ“‡ä¸¦æ¸…ç©ºé«˜äº®æ ¼å­
             }
         }
     }
@@ -95,16 +77,17 @@ public class InputManager : MonoBehaviour
         }
 
         selectedPiece = piece;
-        // Àx¦s¿ï¤¤´Ñ¤lªº­ì©lÃC¦â
+        // å„²å­˜é¸ä¸­æ£‹å­çš„åŸå§‹é¡è‰²
         Renderer rend = selectedPiece.GetComponent<Renderer>();
         if (rend != null)
         {
             originalChessPieceColor = rend.material.color;
-            // °ª«G¿ï¤¤´Ñ¤l
+            // é«˜äº®é¸ä¸­æ£‹å­
             rend.material.color = Color.yellow;
-            Debug.Log($"{selectedPiece.gameObject.name} ³Q¿ï¤¤¨Ã°ª«GÅã¥Ü");
+            Debug.Log($"{selectedPiece.gameObject.name} è¢«é¸ä¸­ä¸¦é«˜äº®é¡¯ç¤º");
         }
-        DisplayAvailableMoves();
+        DisplayAttackRange(piece);
+        DisplayAvailableMoves(piece);
     }
 
     private AStarPathfinding GetAStar()
@@ -116,7 +99,7 @@ public class InputManager : MonoBehaviour
     {
         if (selectedPiece != null && IsCellInRange(cell))
         {
-            // ¨Ï¥Î A* ´M§ä¸ô®|
+            // ä½¿ç”¨ A* å°‹æ‰¾è·¯å¾‘
             Vector2Int start = selectedPiece.gridPosition;
             Vector2Int target = cell.gridPosition;
             var (path, totalCost) = aStar.FindPath(start, target);
@@ -124,16 +107,16 @@ public class InputManager : MonoBehaviour
             if (path != null && path.Count > 1 && totalCost <= selectedPiece.movementRange)
             {
                 currentPath = path;
-                currentPathIndex = 1; // ¸ô®|ªº²Ä¤@­ÓÂI¬O·í«e¦ì¸m
+                currentPathIndex = 1; // è·¯å¾‘çš„ç¬¬ä¸€å€‹é»æ˜¯ç•¶å‰ä½ç½®
                 isMoving = true;
-                Debug.Log($"¸ô®|¤w§ä¨ì¡A¶}©l²¾°Ê´Ñ¤l¡AÁ`¦¨¥»: {totalCost}");
+                Debug.Log($"è·¯å¾‘å·²æ‰¾åˆ°ï¼Œé–‹å§‹ç§»å‹•æ£‹å­ï¼Œç¸½æˆæœ¬: {totalCost}");
             }
             else
             {
-                Debug.Log("¸ô®|¥¼§ä¨ì©ÎÁ`¦¨¥»¶W¥X²¾°Ê½d³ò¡C");
+                Debug.Log("è·¯å¾‘æœªæ‰¾åˆ°æˆ–ç¸½æˆæœ¬è¶…å‡ºç§»å‹•ç¯„åœã€‚");
             }
 
-            // ¤£¥ß§Y¨ú®ø¿ï¾Ü´Ñ¤l¡AÅı selectedPiece «O«ù¦³®Ä
+            // ä¸ç«‹å³å–æ¶ˆé¸æ“‡æ£‹å­ï¼Œè®“ selectedPiece ä¿æŒæœ‰æ•ˆ
         }
     }
 
@@ -141,40 +124,66 @@ public class InputManager : MonoBehaviour
     {
         if (selectedPiece != null)
         {
-            // «ì´_´Ñ¤lªº­ì©lÃC¦â
+            // æ¢å¾©æ£‹å­çš„åŸå§‹é¡è‰²
             Renderer rend = selectedPiece.GetComponent<Renderer>();
             if (rend != null)
             {
                 rend.material.color = originalChessPieceColor;
-                Debug.Log($"{selectedPiece.gameObject.name} ÃC¦â«ì´_¬° {originalChessPieceColor}");
+                Debug.Log($"{selectedPiece.gameObject.name} é¡è‰²æ¢å¾©ç‚º {originalChessPieceColor}");
             }
-            // «ì´_©Ò¦³¥i²¾°Ê®æ¤lªºÃC¦â
+            // æ¢å¾©æ‰€æœ‰å¯ç§»å‹•æ ¼å­çš„é¡è‰²
             foreach (var cell in highlightedCells)
             {
                 cell.ResetMaterial();
             }
-            // ²MªÅ°ª«G®æ¤l¦Cªí
+            // æ¸…ç©ºé«˜äº®æ ¼å­åˆ—è¡¨
             highlightedCells.Clear();
             selectedPiece = null;
             selectedCell = null;
         }
     }
 
-
-    private void DisplayAvailableMoves()
+    private void DisplayAvailableMoves(ChessPiece piece)
     {
         if (selectedPiece != null)
         {
             var accessibleCells = gridManager.GetAccessibleCells(selectedPiece.gridPosition, selectedPiece.movementRange);
             foreach (var cell in accessibleCells)
             {
-                cell.Highlight(); // ¨Ï¥Î GridCell ªº Highlight ¤èªk
-                highlightedCells.Add(cell); // ²K¥[¨ì°ª«G¦Cªí
+                cell.HighlightAsMove(); // ä½¿ç”¨ GridCell çš„ Highlight æ–¹æ³•
+                highlightedCells.Add(cell); // æ·»åŠ åˆ°é«˜äº®åˆ—è¡¨
             }
-            Debug.Log($"Åã¥Ü {accessibleCells.Count} ­Ó¥i²¾°Ê®æ¤l");
+            Debug.Log($"é¡¯ç¤º {accessibleCells.Count} å€‹å¯ç§»å‹•æ ¼å­");
         }
     }
 
+    void DisplayAttackRange(ChessPiece piece)
+    {
+        HashSet<GridCell> totalAttackRangeCells = new HashSet<GridCell>();
+
+        // ç²å–æ£‹å­çš„æ‰€æœ‰å¯ç§»å‹•æ ¼å­
+        List<GridCell> moveRangeCells = gridManager.GetAccessibleCells(piece.gridPosition, piece.movementRange);
+
+        // éæ­·æ‰€æœ‰å¯ç§»å‹•æ ¼å­ ä¸¦å¾è¿™äº›æ ¼å­è¨ˆç®—æ”»æ“Šç¯„åœ
+        foreach (GridCell moveCell in moveRangeCells)
+        {
+            List<GridCell> attackRangeFromMoveCell = gridManager.GetAttackRange(moveCell.gridPosition, piece.attackRange);
+
+            foreach (GridCell attackCell in attackRangeFromMoveCell)
+            {
+                totalAttackRangeCells.Add(attackCell);
+            }
+        }
+
+        // é«˜äº®é¡¯ç¤ºæ‰€æœ‰å¯èƒ½æ”»æ“Šåˆ°çš„æ ¼å­
+        foreach (GridCell attackCell in totalAttackRangeCells)
+        {
+            attackCell.HighlightAsAttack();
+            highlightedCells.Add(attackCell); // æ·»åŠ åˆ°é«˜äº®åˆ—è¡¨
+        }
+
+        Debug.Log($"é¡¯ç¤º {totalAttackRangeCells.Count} å€‹æ”»æ“Šç¯„åœçš„æ ¼å­");
+    }
     private bool IsCellInRange(GridCell cell)
     {
         var accessibleCells = gridManager.GetAccessibleCells(selectedPiece.gridPosition, selectedPiece.movementRange);
@@ -189,7 +198,7 @@ public class InputManager : MonoBehaviour
 
             if (targetCell == null)
             {
-                Debug.LogError("targetCell ¬O null¡I");
+                Debug.LogError("targetCell æ˜¯ nullï¼");
                 isMoving = false;
                 currentPath.Clear();
                 return;
@@ -197,7 +206,7 @@ public class InputManager : MonoBehaviour
 
             if (selectedPiece == null)
             {
-                Debug.LogError("selectedPiece ¬O null¡I");
+                Debug.LogError("selectedPiece æ˜¯ nullï¼");
                 isMoving = false;
                 currentPath.Clear();
                 return;
@@ -205,33 +214,33 @@ public class InputManager : MonoBehaviour
 
             if (selectedPiece.transform == null)
             {
-                Debug.LogError("selectedPiece.transform ¬O null¡I");
+                Debug.LogError("selectedPiece.transform æ˜¯ nullï¼");
                 isMoving = false;
                 currentPath.Clear();
                 return;
             }
 
             Vector3 targetPosition = targetCell.transform.position;
-            targetPosition.y = selectedPiece.transform.position.y; // «O¯d­ì¦³ªº Y ¶b¦ì¸m
+            targetPosition.y = selectedPiece.transform.position.y; // ä¿ç•™åŸæœ‰çš„ Y è»¸ä½ç½®
 
             selectedPiece.transform.position = Vector3.MoveTowards(selectedPiece.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            Debug.Log($"{selectedPiece.gameObject.name} ¥¿¦b²¾°Ê¨ì {targetPosition}");
+            Debug.Log($"{selectedPiece.gameObject.name} æ­£åœ¨ç§»å‹•åˆ° {targetPosition}");
 
             if (Vector3.Distance(selectedPiece.transform.position, targetPosition) < 0.1f)
             {
                 selectedPiece.transform.position = targetPosition;
                 currentPathIndex++;
 
-                // §ó·s´Ñ¤lªº gridPosition
+                // æ›´æ–°æ£‹å­çš„ gridPosition
                 selectedPiece.UpdateGridPosition(targetCell.gridPosition);
-                Debug.Log($"{selectedPiece.gameObject.name} ªº gridPosition §ó·s¬° ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
+                Debug.Log($"{selectedPiece.gameObject.name} çš„ gridPosition æ›´æ–°ç‚º ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
 
                 if (currentPathIndex >= currentPath.Count)
                 {
                     isMoving = false;
                     currentPath.Clear();
-                    Debug.Log("´Ñ¤l¤w¨ì¹F¥Ø¼Ğ¦ì¸m¡C");
-                    DeselectCurrentPiece(); // ¦b²¾°Ê§¹¦¨«á¨ú®ø¿ï¾Ü´Ñ¤l
+                    Debug.Log("æ£‹å­å·²åˆ°é”ç›®æ¨™ä½ç½®ã€‚");
+                    DeselectCurrentPiece(); // åœ¨ç§»å‹•å®Œæˆå¾Œå–æ¶ˆé¸æ“‡æ£‹å­
                 }
             }
         }
@@ -239,15 +248,15 @@ public class InputManager : MonoBehaviour
         {
             if (!isMoving)
             {
-                Debug.Log("isMoving ¬° false¡A¸õ¹L HandleMovement¡C");
+                Debug.Log("isMoving ç‚º falseï¼Œè·³é HandleMovementã€‚");
             }
             if (currentPath == null)
             {
-                Debug.Log("currentPath ¬O null¡A¸õ¹L HandleMovement¡C");
+                Debug.Log("currentPath æ˜¯ nullï¼Œè·³é HandleMovementã€‚");
             }
             if (currentPathIndex >= (currentPath != null ? currentPath.Count : 0))
             {
-                Debug.Log("currentPathIndex ¶W¥X½d³ò¡A¸õ¹L HandleMovement¡C");
+                Debug.Log("currentPathIndex è¶…å‡ºç¯„åœï¼Œè·³é HandleMovementã€‚");
             }
         }
     }
@@ -258,7 +267,7 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                // ¹Á¸Õ§ğÀ»
+                // å˜—è©¦æ”»æ“Š
                 if (selectedPiece is Warrior warrior)
                 {
                     var enemy = warrior.DetectEnemy();
@@ -268,12 +277,12 @@ public class InputManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("¨S¦³¥i§ğÀ»ªº¼Ä¤H");
+                        Debug.Log("æ²’æœ‰å¯æ”»æ“Šçš„æ•µäºº");
                     }
                 }
                 else
                 {
-                    Debug.LogWarning($"{selectedPiece.gameObject.name} ¤£¬O Warrior¡AµLªk§ğÀ»");
+                    Debug.LogWarning($"{selectedPiece.gameObject.name} ä¸æ˜¯ Warriorï¼Œç„¡æ³•æ”»æ“Š");
                 }
             }
         }

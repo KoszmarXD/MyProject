@@ -58,7 +58,7 @@ public class AStarPathfinding : MonoBehaviour
 
             foreach (GridCell neighbor in gridManager.GetNeighbors(currentNode.gridCell))
             {
-                if (!neighbor.isWalkable || IsInList(closedList, neighbor))
+                if (!neighbor.isWalkable || neighbor.currentPiece != null && neighbor != targetCell)
                 {
                     continue;
                 }

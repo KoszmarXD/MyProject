@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +6,8 @@ using static UnityEditor.PlayerSettings;
 
 public class GridManager : MonoBehaviour
 {
-    public TerrainType[] terrainTypes; // ¦bInspector¤¤³]¸m¤£¦Pªº¦a§ÎÃş«¬
-    public List<ChessPiece> chessPieces; // ©Ò¦³´Ñ¤l
+    public TerrainType[] terrainTypes; // åœ¨Inspectorä¸­è¨­ç½®ä¸åŒçš„åœ°å½¢é¡å‹
+    public List<ChessPiece> chessPieces; // æ‰€æœ‰æ£‹å­
 
     private GridCell[,] gridCells;
     private int width = 0;
@@ -21,20 +21,20 @@ public class GridManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ªì©l¤Æ´Ñ½L®æ¡AÅª¨ú³õ´º¤¤©Ò¦³±a¦³ GridCell ²Õ¥óªºª«Åé
+    /// åˆå§‹åŒ–æ£‹ç›¤æ ¼ï¼Œè®€å–å ´æ™¯ä¸­æ‰€æœ‰å¸¶æœ‰ GridCell çµ„ä»¶çš„ç‰©é«”
     /// </summary>
     private void InitializeGrid()
     {
-        // §ä¨ì©Ò¦³³õ´º¤¤ªº GridCell ª«Åé
+        // æ‰¾åˆ°æ‰€æœ‰å ´æ™¯ä¸­çš„ GridCell ç‰©é«”
         GridCell[] cells = FindObjectsOfType<GridCell>();
 
         if (cells.Length == 0)
         {
-            Debug.LogError("³õ´º¤¤¨S¦³§ä¨ì¥ô¦ó GridCell¡I");
+            Debug.LogError("å ´æ™¯ä¸­æ²’æœ‰æ‰¾åˆ°ä»»ä½• GridCellï¼");
             return;
         }
 
-        // °²³]´Ñ½L¬O¯x§Îªº¡A­pºâ¼e«×©M°ª«×
+        // å‡è¨­æ£‹ç›¤æ˜¯çŸ©å½¢çš„ï¼Œè¨ˆç®—å¯¬åº¦å’Œé«˜åº¦
         int maxX = 0;
         int maxZ = 0;
 
@@ -57,28 +57,22 @@ public class GridManager : MonoBehaviour
             if (x >= 0 && x < width && z >= 0 && z < height)
             {
                 gridCells[x, z] = cell;
-                // ªì©l¤Æ©Î§ó·s®æ¤lªºÄİ©Ê¡]®Ú¾Ú TerrainType¡^
+                // åˆå§‹åŒ–æˆ–æ›´æ–°æ ¼å­çš„å±¬æ€§ï¼ˆæ ¹æ“š TerrainTypeï¼‰
                 ApplyTerrainType(cell);
             }
-            else
-            {
-                Debug.LogWarning($"GridCell {cell.name} ªº gridPosition ({x}, {z}) ¶W¥X½d³ò¡I");
-            }
         }
-
-        Debug.Log($"Grid ªì©l¤Æ§¹¦¨¡A¼e«×: {width}, °ª«×: {height}");
     }
     private void InitializeChessPieces()
     {
         chessPieces = new List<ChessPiece>(FindObjectsOfType<ChessPiece>());
     }
     /// <summary>
-    /// ®Ú¾Ú GridCell ªº¦a§ÎÃş«¬À³¥ÎÄİ©Ê©M§÷½è
+    /// æ ¹æ“š GridCell çš„åœ°å½¢é¡å‹æ‡‰ç”¨å±¬æ€§å’Œæè³ª
     /// </summary>
-    /// <param name="cell">­nÀ³¥ÎÄİ©Êªº GridCell</param>
+    /// <param name="cell">è¦æ‡‰ç”¨å±¬æ€§çš„ GridCell</param>
     private void ApplyTerrainType(GridCell cell)
     {
-        // ¨Ï¥ÎªTÁ|¨Ó¤Ç°t§÷½è
+        // ä½¿ç”¨æšèˆ‰ä¾†åŒ¹é…æè³ª
         switch (cell.terrainType)
         {
             case TerrainTypeEnum.Grass:
@@ -91,12 +85,12 @@ public class GridManager : MonoBehaviour
                 cell.SetMaterialBasedOnTerrain();
                 break;
             default:
-                Debug.LogWarning($"¥¼³B²zªº terrainType: {cell.terrainType}");
+                Debug.LogWarning($"æœªè™•ç†çš„ terrainType: {cell.terrainType}");
                 break;
         }
     }
 
-    // ·s¼W¤èªk¡GÀò¨ú«ü©w¦ì¸mªº GridCell
+    // æ–°å¢æ–¹æ³•ï¼šç²å–æŒ‡å®šä½ç½®çš„ GridCell
     public GridCell GetGridCell(Vector2Int position)
     {
         if (position.x >= 0 && position.x < width && position.y >= 0 && position.y < height)
@@ -104,39 +98,35 @@ public class GridManager : MonoBehaviour
             GridCell cell = gridCells[position.x, position.y];
             if (cell != null)
             {
-                Debug.Log($"¨ú±o GridCell: {cell.gameObject.name} at ({position.x}, {position.y})");
+                Debug.Log($"å–å¾— GridCell: {cell.gameObject.name} at ({position.x}, {position.y})");
                 return cell;
             }
             else
             {
-                Debug.LogWarning($"GridCell ¦b ({position.x}, {position.y}) ¬° null¡I");
+                Debug.LogWarning($"GridCell åœ¨ ({position.x}, {position.y}) ç‚º nullï¼");
             }
         }
         else
         {
-            Debug.LogWarning($"GridCell ¦ì¸m ({position.x}, {position.y}) ¶W¥X½d³ò¡I");
+            Debug.LogWarning($"GridCell ä½ç½® ({position.x}, {position.y}) è¶…å‡ºç¯„åœï¼");
         }
         return null;
     }
 
-    // ·s¼W¤èªk¡GÀò¨ú«ü©w GridCell ªº¾F©~
+    // æ–°å¢æ–¹æ³•ï¼šç²å–æŒ‡å®š GridCell çš„é„°å±…
     public List<GridCell> GetNeighbors(GridCell cell)
     {
         List<GridCell> neighbors = new List<GridCell>();
 
         Vector2Int pos = cell.gridPosition;
 
-        // 8 ¤è¦Vªº¾F©~¡]¥i®Ú¾Ú»İ­n½Õ¾ã¬° 4 ¤è¦V¡^
+        // 4 æ–¹å‘çš„é„°å±…
         Vector2Int[] directions = new Vector2Int[]
         {
-            new Vector2Int(0, 1), // ¤W
-            new Vector2Int(1, 0), // ¥k
-            new Vector2Int(0, -1), // ¤U
-            new Vector2Int(-1, 0), // ¥ª
-            /*new Vector2Int(1, 1), // ¥k¤W
-            new Vector2Int(1, -1), // ¥k¤U
-            new Vector2Int(-1, -1), // ¥ª¤U
-            new Vector2Int(-1, 1) // ¥ª¤W*/
+            new Vector2Int(0, 1), // ä¸Š
+            new Vector2Int(1, 0), // å³
+            new Vector2Int(0, -1), // ä¸‹
+            new Vector2Int(-1, 0), // å·¦
         };
 
         foreach (var dir in directions)
@@ -151,25 +141,25 @@ public class GridManager : MonoBehaviour
 
         return neighbors;
     }
-    // Àò¨ú©Ò¦³¦b²¾°Ê½d³ò¤º¥B¥i¹Fªº GridCell
+    // ç²å–æ‰€æœ‰åœ¨ç§»å‹•ç¯„åœå…§ä¸”å¯é”çš„ GridCell
     public List<GridCell> GetAccessibleCells(Vector2Int start, int range)
     {
         List<GridCell> accessible = new List<GridCell>();
         AStarPathfinding aStar = FindObjectOfType<AStarPathfinding>();
         if (aStar == null)
         {
-            Debug.LogError("AStarPathfinding ¥¼¦b³õ´º¤¤§ä¨ì¡I");
+            Debug.LogError("AStarPathfinding æœªåœ¨å ´æ™¯ä¸­æ‰¾åˆ°ï¼");
             return accessible;
         }
 
         GridCell startCell = GetGridCell(start);
         if (startCell == null)
         {
-            Debug.LogError("°_ÂI®æ¤l¬° null¡I");
+            Debug.LogError("èµ·é»æ ¼å­ç‚º nullï¼");
             return accessible;
         }
 
-        // ¹M¾ú©Ò¦³¥i¦æ¨«ªº®æ¤l¡A¨ÃÀË¬d±q°_ÂI¨ì¥Ø¼Ğ®æ¤lªºÁ`¦¨¥»¬O§_¦b½d³ò¤º
+        // éæ­·æ‰€æœ‰å¯è¡Œèµ°çš„æ ¼å­ï¼Œä¸¦æª¢æŸ¥å¾èµ·é»åˆ°ç›®æ¨™æ ¼å­çš„ç¸½æˆæœ¬æ˜¯å¦åœ¨ç¯„åœå…§
         foreach (var cell in gridCells)
         {
             if (cell != null && cell.isWalkable)
@@ -185,7 +175,53 @@ public class GridManager : MonoBehaviour
         return accessible;
     }
 
-    // Àò¨ú©Ò¦³¼Ä¤è´Ñ¤l
+    // Get movement range within certain radius
+    public List<GridCell> GetMovementRange(Vector2Int start, int range)
+    {
+        List<GridCell> movementRangeCells = new List<GridCell>();
+
+        for (int x = -range; x <= range; x++)
+        {
+            for (int y = -range; y <= range; y++)
+            {
+                Vector2Int targetPosition = new Vector2Int(start.x + x, start.y + y);
+                if (Mathf.Abs(x) + Mathf.Abs(y) <= range)
+                {
+                    GridCell cell = GetGridCell(targetPosition);
+                    if (cell != null && cell.isWalkable) // Only highlight walkable cells
+                    {
+                        movementRangeCells.Add(cell);
+                    }
+                }
+            }
+        }
+
+        return movementRangeCells;
+    }
+    public List<GridCell> GetAttackRange(Vector2Int position, int attackRange)
+    {
+        List<GridCell> attackRangeCells = new List<GridCell>();
+
+        for (int x = -attackRange; x <= attackRange; x++)
+        {
+            for (int y = -attackRange; y <= attackRange; y++)
+            {
+                Vector2Int checkPos = new Vector2Int(position.x + x, position.y + y);
+                if (Mathf.Abs(x) + Mathf.Abs(y) <= attackRange)
+                {
+                    GridCell cell = GetGridCell(checkPos);
+                    if (cell != null)
+                    {
+                        attackRangeCells.Add(cell);
+                    }
+                }
+            }
+        }
+
+        return attackRangeCells;
+    }
+
+    // ç²å–æ‰€æœ‰æ•µæ–¹æ£‹å­
     public List<ChessPiece> GetEnemies(bool isPlayerControlled)
     {
         List<ChessPiece> enemies = new List<ChessPiece>();
@@ -199,7 +235,7 @@ public class GridManager : MonoBehaviour
         return enemies;
     }
 
-    // §ó·s´Ñ¤l¦Cªí¡]¨Ò¦p´Ñ¤l¦º¤`®É¡^
+    // æ›´æ–°æ£‹å­åˆ—è¡¨ï¼ˆä¾‹å¦‚æ£‹å­æ­»äº¡æ™‚ï¼‰
     public void RemoveChessPiece(ChessPiece piece)
     {
         if (chessPieces.Contains(piece))

@@ -23,7 +23,7 @@ public class HighlightManager : MonoBehaviour
     // 在指定位置生成高亮
     public void HighlightCell(Vector3 position)
     {
-        Vector3 highlightPosition = new Vector3(position.x, position.y + 0.05f, position.z);
+        Vector3 highlightPosition = new Vector3(position.x, position.y + 0.1f, position.z);
         GameObject highlight = Instantiate(highlightPrefab, highlightPosition, Quaternion.identity);
         currentHighlights.Add(highlight);
         Debug.Log($"Highlighting Cell at {position}");
