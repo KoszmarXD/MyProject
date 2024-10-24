@@ -30,6 +30,8 @@ public class GridCell : MonoBehaviour
 
     public ChessPiece currentPiece;
 
+    public bool isOccupied; // 是否被棋子佔據
+
     [Tooltip("是否可行走")]
     public bool isWalkable = true;
 
@@ -55,6 +57,10 @@ public class GridCell : MonoBehaviour
             return;
         }
         SetMaterialBasedOnTerrain();
+    }
+    void Start()
+    {
+        isOccupied = false;  // 預設所有格子未被佔據
     }
 
     // 根據地形類型設置原始顏色
@@ -89,28 +95,18 @@ public class GridCell : MonoBehaviour
     // 高亮顯示格子
     public void HighlightAsAttack()
     {
-        // Set a material or color for attack range, e.g., red
-        Debug.Log($"Highlighting cell {gameObject.name} as attack range");
-        SetHighlightColor(Color.red);
         isHighlighted = true;
     }
     public void HighlightAsMove()
     {
         if (highlightMaterial != null)
         {
-            rend.material = highlightMaterial;
             isHighlighted = true;
-            Debug.Log($"{gameObject.name} 被高亮顯示");
-        }
-        else
-        {
-            Debug.LogWarning($"{gameObject.name} 沒有設置 Highlight Material！");
-        }
+        }        
     }
     
     public void SetHighlightColor(Color color)
     {
-        // Code to change material or color of the grid cell
         Renderer renderer = GetComponent<Renderer>();
         renderer.material.color = color;
     }

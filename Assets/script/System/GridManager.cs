@@ -65,11 +65,41 @@ public class GridManager : MonoBehaviour
     private void InitializeChessPieces()
     {
         chessPieces = new List<ChessPiece>(FindObjectsOfType<ChessPiece>());
+        foreach (var piece in chessPieces)
+        {
+            GridCell cell = GetGridCell(piece.gridPosition);
+            if (cell != null)
+            {
+                cell.isOccupied = true; // 標記該格子為被佔據
+            }
+        }
     }
-    /// <summary>
-    /// 根據 GridCell 的地形類型應用屬性和材質
-    /// </summary>
-    /// <param name="cell">要應用屬性的 GridCell</param>
+    public void MovePiece(GridCell currentCell, GridCell targetCell, ChessPiece piece)
+    {
+        // 確保先前的格子不再被佔據
+        //GridCell previousCell = GetGridCell(piece.gridPosition);
+        if (targetCell.isOccupied)
+        {
+            Debug.LogWarning("目標格子已被佔據，無法移動。");
+            return; // 結束移動操作
+        }
+
+        // 更新棋子的 gridPosition 為新格子的位置
+        piece.UpdateGridPosition(targetCell.gridPosition);
+
+        if (currentCell != null)  // 確保原位置有效
+        {
+            
+            // 清空原格子的佔據狀態
+            currentCell.isOccupied = false;
+        }
+
+        // 更新新格子的佔據狀態
+        targetCell.isOccupied = true;
+
+        Debug.Log($"{piece.gameObject.name} 移動到新格子 ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
+    }
+    
     private void ApplyTerrainType(GridCell cell)
     {
         // 使用枚舉來匹配材質
@@ -98,17 +128,8 @@ public class GridManager : MonoBehaviour
             GridCell cell = gridCells[position.x, position.y];
             if (cell != null)
             {
-                Debug.Log($"取得 GridCell: {cell.gameObject.name} at ({position.x}, {position.y})");
                 return cell;
             }
-            else
-            {
-                Debug.LogWarning($"GridCell 在 ({position.x}, {position.y}) 為 null！");
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"GridCell 位置 ({position.x}, {position.y}) 超出範圍！");
         }
         return null;
     }
@@ -202,7 +223,6 @@ public class GridManager : MonoBehaviour
     {
         List<GridCell> attackRangeCells = new List<GridCell>();
 
-        // 簡單的範例邏輯，根據曼哈頓距離計算攻擊範圍
         for (int x = -attackRange; x <= attackRange; x++)
         {
             for (int y = -attackRange; y <= attackRange; y++)
@@ -241,6 +261,13 @@ public class GridManager : MonoBehaviour
     {
         if (chessPieces.Contains(piece))
         {
+            // 清除棋子佔據的格子狀態
+            GridCell currentCell = GetGridCell(piece.gridPosition);
+            if (currentCell != null)
+            {
+                currentCell.isOccupied = false;
+            }
+
             chessPieces.Remove(piece);
         }
     }

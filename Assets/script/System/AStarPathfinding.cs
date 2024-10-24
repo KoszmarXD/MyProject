@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AStarPathfinding : MonoBehaviour
@@ -39,8 +40,12 @@ public class AStarPathfinding : MonoBehaviour
         Node startNode = new Node(startCell, null, 0f, GetHeuristic(startCell, targetCell));
         openList.Add(startNode);
 
-        while (openList.Count > 0)
+        int maxIterations = 10;
+        int iteration = 0;
+
+        while (openList.Count > 0 && iteration < maxIterations)
         {
+            iteration++;
             // 找到 f 值最低的節點
             openList.Sort((a, b) => a.fCost.CompareTo(b.fCost));
             Node currentNode = openList[0];
@@ -58,7 +63,7 @@ public class AStarPathfinding : MonoBehaviour
 
             foreach (GridCell neighbor in gridManager.GetNeighbors(currentNode.gridCell))
             {
-                if (!neighbor.isWalkable || neighbor.currentPiece != null && neighbor != targetCell)
+                if (!neighbor.isWalkable || closedList.Any(n => n.gridCell == neighbor) || neighbor.currentPiece != null && neighbor != targetCell)
                 {
                     continue;
                 }

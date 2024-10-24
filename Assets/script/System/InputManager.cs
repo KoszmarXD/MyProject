@@ -120,7 +120,12 @@ public class InputManager : MonoBehaviour
                 Debug.Log("路徑未找到或總成本超出移動範圍。");
             }
 
-            // 不立即取消選擇棋子，讓 selectedPiece 保持有效
+            GridCell currentCell = gridManager.GetGridCell(selectedPiece.gridPosition);
+
+            if (currentCell != null)
+            {
+                gridManager.MovePiece(currentCell, cell, selectedPiece);
+            }
         }
     }
 
@@ -219,14 +224,6 @@ public class InputManager : MonoBehaviour
                 return;
             }
 
-            if (selectedPiece.transform == null)
-            {
-                Debug.LogError("selectedPiece.transform 是 null！");
-                isMoving = false;
-                currentPath.Clear();
-                return;
-            }
-
             Vector3 targetPosition = targetCell.transform.position;
             targetPosition.y = selectedPiece.transform.position.y; // 保留原有的 Y 軸位置
 
@@ -251,7 +248,7 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
-        else
+        /*else
         {
             if (!isMoving)
             {
@@ -265,7 +262,7 @@ public class InputManager : MonoBehaviour
             {
                 Debug.Log("currentPathIndex 超出範圍，跳過 HandleMovement。");
             }
-        }
+        }*/
     }
 
     private void HandleCommands()
