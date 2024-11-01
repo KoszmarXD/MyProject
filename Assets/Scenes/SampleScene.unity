@@ -4496,6 +4496,7 @@ MonoBehaviour:
   chessPieces:
   - {fileID: 188718389}
   - {fileID: 4065369043958187188}
+  selectionEffectPrefab: {fileID: 8460511238875029375, guid: 6ba3e0c5ed11ace4fbd93192a37821b3, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,10 +14,18 @@ public class GridManager : MonoBehaviour
     private int height = 0;
     private object maxCost;
 
+    public GameObject selectionEffectPrefab; // 指向效果的Prefab
+    private GameObject currentSelectionEffect; // 當前顯示的選擇效果物件
+
     void Start()
     {
         InitializeGrid();
         InitializeChessPieces();
+    }
+
+    void Update()
+    {
+        HandleSelectionEffect();
     }
 
     /// <summary>
@@ -271,7 +279,40 @@ public class GridManager : MonoBehaviour
             chessPieces.Remove(piece);
         }
     }
-    
+
+    private void HandleSelectionEffect()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        {
+            GridCell cell = hit.collider.GetComponent<GridCell>();
+
+            if (cell != null)
+            {
+                // 如果有選擇效果物件，且它不是在當前格子上，先刪除
+                if (currentSelectionEffect != null && currentSelectionEffect.transform.parent != cell.transform)
+                {
+                    Destroy(currentSelectionEffect);
+                }
+
+                // 如果沒有選擇效果物件，就生成一個在當前格子上
+                if (currentSelectionEffect == null)
+                {
+                    currentSelectionEffect = Instantiate(selectionEffectPrefab, cell.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, cell.transform);
+                }
+            }
+        }
+        else
+        {
+            // 滑鼠移出任何格子時，清除選擇效果
+            if (currentSelectionEffect != null)
+            {
+                Destroy(currentSelectionEffect);
+            }
+        }
+    }
+
     void OnDrawGizmos()
     {
         if (gridCells == null)
