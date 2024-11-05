@@ -30,7 +30,9 @@ public class GridCell : MonoBehaviour
 
     public ChessPiece currentPiece;
 
-    public bool isOccupied; // 是否被棋子佔據
+    public bool isOccupied = false; // 記錄格子是否被佔據
+    public int selectableLayer = 6; // 可選擇的層，例如第6層是SelectableLayer
+    public int defaultLayer = 0;    // Unity中的Default層通常是第0層
 
     [Tooltip("是否可行走")]
     public bool isWalkable = true;
@@ -61,6 +63,10 @@ public class GridCell : MonoBehaviour
     void Start()
     {
         isOccupied = false;  // 預設所有格子未被佔據
+    }
+    public void UpdateLayer()
+    {
+        gameObject.layer = isOccupied ? defaultLayer : selectableLayer;
     }
 
     // 根據地形類型設置原始顏色

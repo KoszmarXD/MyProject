@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
 {
     private GridManager gridManager;
     private ChessPiece selectedPiece;
-    private GridCell selectedCell;
+    //private GridCell selectedCell;
 
     private AStarPathfinding aStar;
     public float moveSpeed = 5f; // 棋子移動速度
@@ -148,7 +148,7 @@ public class InputManager : MonoBehaviour
             activeHighlights.Clear();
 
             selectedPiece = null;
-            selectedCell = null;
+            //selectedCell = null;
         }
     }
 

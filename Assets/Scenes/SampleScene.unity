@@ -174,6 +174,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -301,6 +303,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -428,6 +432,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -555,6 +561,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -732,6 +740,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -859,6 +869,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1009,6 +1021,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1136,6 +1150,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1263,6 +1279,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1390,6 +1408,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1517,6 +1537,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -1644,6 +1666,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1771,6 +1795,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -1898,6 +1924,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2025,6 +2053,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2152,6 +2182,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2279,6 +2311,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2404,8 +2438,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 9
-  currentPiece: {fileID: 0}
+  currentPiece: {fileID: 4065369043958187188}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2556,6 +2592,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2683,6 +2721,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2810,6 +2850,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -2937,6 +2979,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3064,6 +3108,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3191,6 +3237,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -3318,6 +3366,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3445,6 +3495,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3572,6 +3624,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3699,6 +3753,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3826,6 +3882,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -3953,6 +4011,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -4111,6 +4171,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -4243,6 +4305,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -4370,6 +4434,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -4642,6 +4708,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -4769,6 +4837,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -4896,6 +4966,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -5105,6 +5177,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -5333,6 +5407,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -5460,6 +5536,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -5669,6 +5747,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -5796,6 +5876,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -5923,6 +6005,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -6161,6 +6245,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -6288,6 +6374,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -6546,6 +6634,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -6673,6 +6763,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -6800,6 +6892,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -6927,6 +7021,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7054,6 +7150,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7181,6 +7279,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7308,6 +7408,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7435,6 +7537,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7562,6 +7666,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7689,6 +7795,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7816,6 +7924,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -7943,6 +8053,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8070,6 +8182,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8197,6 +8311,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8324,6 +8440,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8451,6 +8569,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8578,6 +8698,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8705,6 +8827,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8832,6 +8956,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -8959,6 +9085,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9086,6 +9214,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9213,6 +9343,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9340,6 +9472,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9573,6 +9707,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9700,6 +9836,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9827,6 +9965,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -9954,6 +10094,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -10081,6 +10223,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -10208,6 +10352,8 @@ MonoBehaviour:
   zPosition: 1
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -10335,6 +10481,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -10462,6 +10610,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -10633,6 +10783,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -10760,6 +10912,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -10887,6 +11041,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11014,6 +11170,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11141,6 +11299,8 @@ MonoBehaviour:
   zPosition: 2
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11268,6 +11428,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -11395,6 +11557,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11522,6 +11686,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11649,6 +11815,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11776,6 +11944,8 @@ MonoBehaviour:
   zPosition: 9
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -11903,6 +12073,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12030,6 +12202,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12157,6 +12331,8 @@ MonoBehaviour:
   zPosition: 8
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12282,8 +12458,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 0
-  currentPiece: {fileID: 0}
+  currentPiece: {fileID: 348589885}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12411,6 +12589,8 @@ MonoBehaviour:
   zPosition: 0
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12538,6 +12718,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12665,6 +12847,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12792,6 +12976,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -12919,6 +13105,8 @@ MonoBehaviour:
   zPosition: 7
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -13046,6 +13234,8 @@ MonoBehaviour:
   zPosition: 4
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -13173,6 +13363,8 @@ MonoBehaviour:
   zPosition: 3
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -13300,6 +13492,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -13495,6 +13689,8 @@ MonoBehaviour:
   zPosition: 6
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 1
   movementCost: 1
   terrainType: 0
@@ -13622,6 +13818,8 @@ MonoBehaviour:
   zPosition: 5
   currentPiece: {fileID: 0}
   isOccupied: 0
+  selectableLayer: 6
+  defaultLayer: 0
   isWalkable: 0
   movementCost: 1
   terrainType: 1
@@ -13859,6 +14057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 7513814219035706513, guid: 1e9378f97e9d4e643982baae75f6e798, type: 3}
+      propertyPath: currentPiece
+      value: 
+      objectReference: {fileID: 188718389}
     - target: {fileID: 7513814219035706513, guid: 1e9378f97e9d4e643982baae75f6e798, type: 3}
       propertyPath: highlightMaterial
       value: 

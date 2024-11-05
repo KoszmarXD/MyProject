@@ -28,9 +28,7 @@ public class GridManager : MonoBehaviour
         HandleSelectionEffect();
     }
 
-    /// <summary>
-    /// 初始化棋盤格，讀取場景中所有帶有 GridCell 組件的物體
-    /// </summary>
+    // 初始化棋盤格，讀取場景中所有帶有 GridCell 組件的物體
     private void InitializeGrid()
     {
         // 找到所有場景中的 GridCell 物體
@@ -69,6 +67,23 @@ public class GridManager : MonoBehaviour
                 ApplyTerrainType(cell);
             }
         }
+        chessPieces = new List<ChessPiece>(FindObjectsOfType<ChessPiece>());
+
+        foreach (var piece in chessPieces)
+        {
+            Vector2Int piecePosition = piece.gridPosition; // 每個棋子有 gridPosition 屬性
+            GridCell occupiedCell = GetGridCell(piecePosition); // 獲取棋子所在的格子
+
+            if (occupiedCell != null)
+            {
+                occupiedCell.isOccupied = true;   // 將格子標記為被佔據
+                occupiedCell.UpdateLayer();       // 更新 Layer 為 Default
+            }
+            else
+            {
+                Debug.LogWarning($"棋子 {piece.name} 的位置無法找到對應的 GridCell！");
+            }
+        }
     }
     private void InitializeChessPieces()
     {
@@ -84,28 +99,14 @@ public class GridManager : MonoBehaviour
     }
     public void MovePiece(GridCell currentCell, GridCell targetCell, ChessPiece piece)
     {
-        // 確保先前的格子不再被佔據
-        //GridCell previousCell = GetGridCell(piece.gridPosition);
-        if (targetCell.isOccupied)
-        {
-            Debug.LogWarning("目標格子已被佔據，無法移動。");
-            return; // 結束移動操作
-        }
+        if (currentCell != null) currentCell.isOccupied = false;  // 原格子釋放
+        currentCell.UpdateLayer(); 
+        if (targetCell != null) targetCell.isOccupied = true;     // 新格子被佔據
+        targetCell.UpdateLayer();
 
         // 更新棋子的 gridPosition 為新格子的位置
         piece.UpdateGridPosition(targetCell.gridPosition);
 
-        if (currentCell != null)  // 確保原位置有效
-        {
-            
-            // 清空原格子的佔據狀態
-            currentCell.isOccupied = false;
-        }
-
-        // 更新新格子的佔據狀態
-        targetCell.isOccupied = true;
-
-        Debug.Log($"{piece.gameObject.name} 移動到新格子 ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
     }
     
     private void ApplyTerrainType(GridCell cell)
@@ -288,18 +289,18 @@ public class GridManager : MonoBehaviour
         {
             GridCell cell = hit.collider.GetComponent<GridCell>();
 
-            if (cell != null)
+            if (cell != null && !cell.isOccupied) // 檢查是否被佔據
             {
-                // 如果有選擇效果物件，且它不是在當前格子上，先刪除
+                // 若有選擇效果物件，且它不是當前格子上，刪除它
                 if (currentSelectionEffect != null && currentSelectionEffect.transform.parent != cell.transform)
                 {
                     Destroy(currentSelectionEffect);
                 }
 
-                // 如果沒有選擇效果物件，就生成一個在當前格子上
+                // 若沒有選擇效果物件，生成在當前格子上
                 if (currentSelectionEffect == null)
                 {
-                    currentSelectionEffect = Instantiate(selectionEffectPrefab, cell.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity, cell.transform);
+                    currentSelectionEffect = Instantiate(selectionEffectPrefab, cell.transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity, cell.transform);
                 }
             }
         }
