@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7c97b00940cbc4ea2974c3c94a9a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   selectableLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -968,8 +968,9 @@ MonoBehaviour:
   isPlayerControlled: 1
   movementRange: 3
   attackRange: 1
-  health: 100
   attackDamage: 25
+  health: 100
+  gridManager: {fileID: 675987257}
 --- !u!1 &198339430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 9
   zPosition: 9
-  currentPiece: {fileID: 4065369043958187188}
+  currentPiece: {fileID: 0}
   isOccupied: 0
   selectableLayer: 6
   defaultLayer: 0
@@ -2539,8 +2540,9 @@ MonoBehaviour:
   isPlayerControlled: 1
   movementRange: 3
   attackRange: 1
-  health: 100
   attackDamage: 25
+  health: 100
+  gridManager: {fileID: 675987257}
 --- !u!1 &366255842
 GameObject:
   m_ObjectHideFlags: 0
@@ -4098,6 +4100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530819631}
+  - component: {fileID: 530819632}
   m_Layer: 0
   m_Name: TurnManager
   m_TagString: Untagged
@@ -4120,6 +4123,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530819632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530819629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f56c91045ef9fa45b399eb08dbca062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerTurn: 0
 --- !u!1 &571894546
 GameObject:
   m_ObjectHideFlags: 0
@@ -4562,6 +4578,7 @@ MonoBehaviour:
   chessPieces:
   - {fileID: 188718389}
   - {fileID: 4065369043958187188}
+  - {fileID: 348589885}
   selectionEffectPrefab: {fileID: 8460511238875029375, guid: 6ba3e0c5ed11ace4fbd93192a37821b3, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -12458,7 +12475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 3
   zPosition: 0
-  currentPiece: {fileID: 348589885}
+  currentPiece: {fileID: 0}
   isOccupied: 0
   selectableLayer: 6
   defaultLayer: 0
@@ -13973,6 +13990,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 978675475242930493, guid: f98ac28a29e095b46bca5091dc3155d8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4065369043958187188}
+    - targetCorrespondingSourceObject: {fileID: 978675475242930493, guid: f98ac28a29e095b46bca5091dc3155d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4065369043958187189}
   m_SourcePrefab: {fileID: 100100000, guid: f98ac28a29e095b46bca5091dc3155d8, type: 3}
 --- !u!114 &4065369043958187188
 MonoBehaviour:
@@ -13990,8 +14010,21 @@ MonoBehaviour:
   isPlayerControlled: 0
   movementRange: 3
   attackRange: 1
-  health: 100
   attackDamage: 25
+  health: 100
+  gridManager: {fileID: 675987257}
+--- !u!114 &4065369043958187189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578666972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f9f859ebb305145a00020308ea8f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4425039133453419103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1430464552676696116, guid: 1e9378f97e9d4e643982baae75f6e798, type: 3}
@@ -14060,7 +14093,7 @@ PrefabInstance:
     - target: {fileID: 7513814219035706513, guid: 1e9378f97e9d4e643982baae75f6e798, type: 3}
       propertyPath: currentPiece
       value: 
-      objectReference: {fileID: 188718389}
+      objectReference: {fileID: 0}
     - target: {fileID: 7513814219035706513, guid: 1e9378f97e9d4e643982baae75f6e798, type: 3}
       propertyPath: highlightMaterial
       value: 

@@ -24,13 +24,11 @@ public class AStarPathfinding : MonoBehaviour
 
         if (startCell == null || targetCell == null)
         {
-            Debug.LogError("起點或終點格子為 null！");
             return (null, 0f);
         }
 
         if (!targetCell.isWalkable)
         {
-            Debug.LogError("終點格子不可行走！");
             return (null, 0f);
         }
 
@@ -55,7 +53,6 @@ public class AStarPathfinding : MonoBehaviour
             // 如果到達終點，重建路徑
             if (currentNode.gridCell == targetCell)
             {
-                Debug.Log("成功找到路徑！");
                 List<GridCell> path = ReconstructPath(currentNode);
                 float totalCost = currentNode.gCost;
                 return (path, totalCost);
@@ -75,19 +72,15 @@ public class AStarPathfinding : MonoBehaviour
                 {
                     neighborNode = new Node(neighbor, currentNode, tentativeGCost, GetHeuristic(neighbor, targetCell));
                     openList.Add(neighborNode);
-                    Debug.Log($"添加到開放列表: {neighbor.gameObject.name}，fCost: {neighborNode.fCost}");
                 }
                 else if (tentativeGCost < neighborNode.gCost)
                 {
                     neighborNode.gCost = tentativeGCost;
                     neighborNode.parent = currentNode;
-                    Debug.Log($"更新節點: {neighbor.gameObject.name}，新的 fCost: {neighborNode.fCost}");
                 }
             }
         }
-
         // 無法找到路徑
-        Debug.LogWarning("無法找到從起點到終點的路徑！");
         return (null, 0f);
     }
 

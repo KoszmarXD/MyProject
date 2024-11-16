@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
@@ -27,46 +29,49 @@ public class GridManager : MonoBehaviour
     {
         HandleSelectionEffect();
     }
+    public void UpdateGridCellState(GridCell cell, bool isOccupied)
+    {
+        // 根據傳入的佔據狀態更新指定的格子
+        if (isOccupied)
+        {
+            cell.gameObject.layer = LayerMask.NameToLayer("Default");
+            cell.isOccupied = true;
+        }
+        else
+        {
+            cell.gameObject.layer = LayerMask.NameToLayer("Selectable");
+            cell.isOccupied = false;
+        }
+    }
 
     // 初始化棋盤格，讀取場景中所有帶有 GridCell 組件的物體
     private void InitializeGrid()
     {
         // 找到所有場景中的 GridCell 物體
         GridCell[] cells = FindObjectsOfType<GridCell>();
-
-        if (cells.Length == 0)
-        {
-            Debug.LogError("場景中沒有找到任何 GridCell！");
-            return;
-        }
-
-        // 假設棋盤是矩形的，計算寬度和高度
-        int maxX = 0;
-        int maxZ = 0;
+        if (cells.Length == 0) return;
+        int maxX = 0, maxZ = 0;
 
         foreach (var cell in cells)
         {
-            if (cell.gridPosition.x > maxX) maxX = cell.gridPosition.x;
-            if (cell.gridPosition.y > maxZ) maxZ = cell.gridPosition.y;
+            maxX = Math.Max(maxX, cell.gridPosition.x);
+            maxZ = Math.Max(maxZ, cell.gridPosition.y);
         }
 
         width = maxX + 1;
         height = maxZ + 1;
-
         gridCells = new GridCell[width, height];
 
         foreach (var cell in cells)
         {
-            int x = cell.gridPosition.x;
-            int z = cell.gridPosition.y;
-
-            if (x >= 0 && x < width && z >= 0 && z < height)
+            if (cell.gridPosition.x >= 0 && cell.gridPosition.x < width &&
+                cell.gridPosition.y >= 0 && cell.gridPosition.y < height)
             {
-                gridCells[x, z] = cell;
-                // 初始化或更新格子的屬性（根據 TerrainType）
+                gridCells[cell.gridPosition.x, cell.gridPosition.y] = cell;
                 ApplyTerrainType(cell);
             }
         }
+
         chessPieces = new List<ChessPiece>(FindObjectsOfType<ChessPiece>());
 
         foreach (var piece in chessPieces)
@@ -81,7 +86,6 @@ public class GridManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"棋子 {piece.name} 的位置無法找到對應的 GridCell！");
             }
         }
     }
@@ -95,31 +99,77 @@ public class GridManager : MonoBehaviour
             {
                 cell.isOccupied = true; // 標記該格子為被佔據
             }
+            // 將 GridManager 傳入棋子
+            piece.Initialize(this);
         }
     }
     public void MovePiece(GridCell currentCell, GridCell targetCell, ChessPiece piece)
     {
-        if (currentCell != null) currentCell.isOccupied = false;  // 原格子釋放
-        currentCell.UpdateLayer(); 
-        if (targetCell != null) targetCell.isOccupied = true;     // 新格子被佔據
-        targetCell.UpdateLayer();
+        if (piece.hasMoved)
+        {
+            Debug.Log($"{piece.gameObject.name} 本回合已移動過");
+            return;
+        }
 
-        // 更新棋子的 gridPosition 為新格子的位置
-        piece.UpdateGridPosition(targetCell.gridPosition);
+        AStarPathfinding pathfinder = FindObjectOfType<AStarPathfinding>();
+        if (pathfinder == null)
+        {
+            Debug.LogError("找不到 AStarPathfinding 組件");
+            return;
+        }
 
+        // 計算路徑
+        var (path, totalCost) = pathfinder.FindPath(currentCell.gridPosition, targetCell.gridPosition);
+        if (path == null || path.Count == 0)
+        {
+            Debug.LogError("無法到達目標位置");
+            return;
+        }
+
+        // 開始沿著路徑移動
+        StartCoroutine(MoveAlongPath(piece, path));
+
+        // 更新格子佔據狀態
+        ResetOccupiedCells(piece, currentCell);
+
+        // 更新棋子的位置
+        piece.UpdateGridPosition(targetCell.gridPosition, this);
+
+        // 設定棋子為已移動
+        piece.hasMoved = true;
     }
-    
+
+    private IEnumerator MoveAlongPath(ChessPiece piece, List<GridCell> path)
+    {
+        foreach (GridCell cell in path)
+        {
+            Vector3 targetPosition = cell.transform.position;
+            targetPosition.y = piece.transform.position.y; // 保持 Y 軸穩定
+
+            // 平滑移動
+            float elapsedTime = 0f;
+            float moveDuration = 0.2f; // 每格移動時間
+            Vector3 startPosition = piece.transform.position;
+
+            while (elapsedTime < moveDuration)
+            {
+                piece.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // 強制調整到目標格子
+            piece.transform.position = targetPosition;
+        }
+    }
+
     private void ApplyTerrainType(GridCell cell)
     {
         // 使用枚舉來匹配材質
         switch (cell.terrainType)
         {
             case TerrainTypeEnum.Grass:
-                cell.SetMaterialBasedOnTerrain();
-                break;
             case TerrainTypeEnum.Water:
-                cell.SetMaterialBasedOnTerrain();
-                break;
             case TerrainTypeEnum.Mountain:
                 cell.SetMaterialBasedOnTerrain();
                 break;
@@ -134,11 +184,7 @@ public class GridManager : MonoBehaviour
     {
         if (position.x >= 0 && position.x < width && position.y >= 0 && position.y < height)
         {
-            GridCell cell = gridCells[position.x, position.y];
-            if (cell != null)
-            {
-                return cell;
-            }
+            return gridCells[position.x, position.y];
         }
         return null;
     }
@@ -178,14 +224,12 @@ public class GridManager : MonoBehaviour
         AStarPathfinding aStar = FindObjectOfType<AStarPathfinding>();
         if (aStar == null)
         {
-            Debug.LogError("AStarPathfinding 未在場景中找到！");
             return accessible;
         }
 
         GridCell startCell = GetGridCell(start);
         if (startCell == null)
         {
-            Debug.LogError("起點格子為 null！");
             return accessible;
         }
 
@@ -194,15 +238,36 @@ public class GridManager : MonoBehaviour
         {
             if (cell != null && cell.isWalkable)
             {
+                // 使用 A* 尋路
                 var (path, totalCost) = aStar.FindPath(start, cell.gridPosition);
                 if (path != null && totalCost <= range)
-                {
                     accessible.Add(cell);
+            }
+        }
+        return accessible;
+    }
+
+    // 新增：獲取棋子的可移動範圍
+    public List<GridCell> GetAvailableCells(Vector2Int gridPosition, int movementRange, bool isPlayerControlled)
+    {
+        List<GridCell> accessibleCells = new List<GridCell>();
+
+        for (int x = -movementRange; x <= movementRange; x++)
+        {
+            for (int y = -movementRange; y <= movementRange; y++)
+            {
+                Vector2Int targetPosition = new Vector2Int(gridPosition.x + x, gridPosition.y + y);
+                if (Mathf.Abs(x) + Mathf.Abs(y) <= movementRange)
+                {
+                    GridCell cell = GetGridCell(targetPosition);
+                    if (cell != null && cell.isWalkable && !cell.isOccupied)
+                    {
+                        accessibleCells.Add(cell);
+                    }
                 }
             }
         }
-
-        return accessible;
+        return accessibleCells;
     }
 
     // Get movement range within certain radius
@@ -225,7 +290,6 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-
         return movementRangeCells;
     }
     public List<GridCell> GetAttackRange(Vector2Int position, int attackRange)
@@ -247,8 +311,27 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-
         return attackRangeCells;
+    }
+    // 重置每回合的棋子狀態
+    public void ResetTurnState()
+    {
+        foreach (var piece in chessPieces)
+        {
+            piece.hasMoved = false;
+            piece.hasAttacked = false;
+        }
+    }
+    public bool IsValidGridPosition(Vector2Int position)
+    {
+        // 檢查是否在棋盤範圍內
+        if (position.x >= 0 && position.x < width && position.y >= 0 && position.y < height)
+        {
+            GridCell cell = GetGridCell(position); // 獲取對應的格子
+                                                   // 確保該格子存在，並且是可行走的
+            return cell != null && cell.isWalkable && !cell.isOccupied;
+        }
+        return false; // 若不在範圍內則返回 false
     }
 
     // 獲取所有敵方棋子
@@ -313,6 +396,50 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+    public void ResetOccupiedCells(ChessPiece movedPiece = null, GridCell previousCell = null)
+    {
+        // 如果提供了棋子和起始格子，僅更新相關格子
+        if (movedPiece != null && previousCell != null)
+        {
+            // 清除起始格子的狀態
+            if (previousCell != null)
+            {
+                previousCell.isOccupied = false;
+                previousCell.gameObject.layer = LayerMask.NameToLayer("Selectable");
+            }
+
+            // 設定目標格子的狀態
+            GridCell targetCell = GetGridCell(movedPiece.gridPosition);
+            if (targetCell != null)
+            {
+                targetCell.isOccupied = true;
+                targetCell.gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+
+            return;
+        }
+
+        // 如果未提供參數，則重置整個棋盤
+        foreach (var cell in gridCells)
+        {
+            if (cell != null)
+            {
+                cell.isOccupied = false;
+                cell.gameObject.layer = LayerMask.NameToLayer("Selectable");
+            }
+        }
+
+        // 根據所有棋子的當前位置更新格子狀態
+        foreach (var piece in chessPieces)
+        {
+            GridCell occupiedCell = GetGridCell(piece.gridPosition);
+            if (occupiedCell != null)
+            {
+                occupiedCell.isOccupied = true;
+                occupiedCell.gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+        }
+    }
 
     void OnDrawGizmos()
     {
@@ -331,10 +458,5 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    internal List<GridCell> GetAvailableCells(Vector2Int gridPosition, int movementRange, bool isPlayerControlled)
-    {
-        throw new NotImplementedException();
     }
 }

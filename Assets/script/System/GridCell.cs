@@ -55,7 +55,6 @@ public class GridCell : MonoBehaviour
         rend = GetComponent<Renderer>();
         if (rend == null)
         {
-            Debug.LogError($"{gameObject.name} 缺少 Renderer 組件！");
             return;
         }
         SetMaterialBasedOnTerrain();
@@ -90,11 +89,9 @@ public class GridCell : MonoBehaviour
         if (originalMaterial != null)
         {
             rend.material = originalMaterial;
-            Debug.Log($"{gameObject.name} 設置材質為 {originalMaterial.name}");
         }
         else
         {
-            Debug.LogWarning($"{gameObject.name} 未找到對應的原始材質！");
         }
     }
 
@@ -124,11 +121,9 @@ public class GridCell : MonoBehaviour
         {
             rend.material = originalMaterial;
             isHighlighted = false;
-            Debug.Log($"{gameObject.name} 材質重置為 {originalMaterial.name}");
         }
         else
         {
-            Debug.LogWarning($"{gameObject.name} 原始材質為 null，無法重置！");
         }
     }
 }

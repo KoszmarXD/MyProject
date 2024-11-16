@@ -5,19 +5,35 @@ using System;
 
 public class Warrior : ChessPiece
 {
-    public int attackDamage = 25;
-
     protected override void Start()
     {
         base.Start();
         // 初始化其他戰士特有的屬性
+        attackDamage = 25; // 設定戰士的攻擊傷害
     }
 
     public override void TakeTurn()
     {
         // 戰士的行為模式：移動並攻擊
-        List<GridCell> availableMoves = gridManager.GetAvailableCells(gridPosition, movementRange, isPlayerControlled);
+        //List<GridCell> availableMoves = gridManager.GetAvailableCells(gridPosition, movementRange, isPlayerControlled);
         // 這裡可以添加移動和攻擊的具體邏輯
+        if (hasMoved && hasAttacked)
+        {
+            Debug.Log($"{gameObject.name} 已經完成移動和攻擊行動，結束回合");
+            return;
+        }
+
+        ChessPiece target = DetectEnemy();
+        if (!hasMoved && target == null)
+        {
+            SetHasMoved(true);
+        }
+
+        if (target != null && !hasAttacked)
+        {
+            Attack(target);
+            SetHasAttacked(true);
+        }
     }
     public override void ReceiveDamage(int damage)
     {
@@ -30,17 +46,7 @@ public class Warrior : ChessPiece
         base.Die();
         // 你可以在這裡添加更多戰士特有的死亡行為
         // 例如播放死亡動畫、掉落物品等
-    }
-
-    // 攻擊方法
-    public void Attack(ChessPiece target)
-    {
-        if (target != null)
-        {
-            target.ReceiveDamage(attackDamage);
-            Debug.Log($"{gameObject.name} 攻擊了 {target.gameObject.name} 造成 {attackDamage} 傷害");
-        }
-    }
+    }    
 
     // 檢測周圍是否有敵人
     public ChessPiece DetectEnemy()

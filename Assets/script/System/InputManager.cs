@@ -7,20 +7,13 @@ public class InputManager : MonoBehaviour
 {
     private GridManager gridManager;
     private ChessPiece selectedPiece;
-    //private GridCell selectedCell;
-
     private AStarPathfinding aStar;
     public float moveSpeed = 5f; // 棋子移動速度
 
     public LayerMask selectableLayers;
 
-    // 用於存儲當前高亮的格子
-    private List<GridCell> highlightedCells = new List<GridCell>();
-
-    // 用於存儲選中棋子的原始顏色
     private Color originalChessPieceColor;
 
-    // 當前路徑
     private List<GridCell> currentPath = new List<GridCell>();
     private int currentPathIndex = 0;
     private bool isMoving = false;
@@ -29,30 +22,40 @@ public class InputManager : MonoBehaviour
     public GameObject attackHighlightPrefab; // 用於顯示攻擊範圍的 Prefab
 
     private List<GameObject> activeHighlights = new List<GameObject>(); // 儲存當前生成的高亮物件
+    private bool isPlayerTurn = true;  // 用於確認是否為玩家回合
+
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
         aStar = FindObjectOfType<AStarPathfinding>();
+        if (TurnManager.Instance != null)
+        {
+            TurnManager.Instance.OnTurnChanged += OnTurnChanged;
+        }
     }
 
     void Update()
     {
-        HandleSelection();
-        HandleCommands();
+        // 確認是否為玩家回合，且不能在 AI 回合中操作
+        if (TurnManager.Instance.isPlayerTurn)
+        {
+            HandleSelection();
+            HandleCommands();
+        }
         HandleMovement();
     }
 
     private void HandleSelection()
     {
+        if (!isPlayerTurn || isMoving) return;  // 在非玩家回合或移動中不允許選擇
+
         if (Input.GetMouseButtonDown(0) && (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject()))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.Log("發射射線");
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, selectableLayers))
             {
-                Debug.Log($"射線擊中: {hit.collider.gameObject.name}");
                 ChessPiece piece = hit.collider.GetComponent<ChessPiece>();
-                if (piece != null && piece.isPlayerControlled)
+                if (piece != null && piece.isPlayerControlled && !piece.hasMoved)
                 {
                     SelectPiece(piece);
                 }
@@ -67,7 +70,6 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("射線未擊中任何物體");
                 DeselectCurrentPiece(); // 當點擊空白處時，取消選擇並清空高亮格子
             }
         }
@@ -75,23 +77,18 @@ public class InputManager : MonoBehaviour
 
     private void SelectPiece(ChessPiece piece)
     {
-        if (selectedPiece != null)
-        {
-            DeselectCurrentPiece();
-        }
-
+        DeselectCurrentPiece();
         selectedPiece = piece;
-        // 儲存選中棋子的原始顏色
+        
         Renderer rend = selectedPiece.GetComponent<Renderer>();
         if (rend != null)
         {
             originalChessPieceColor = rend.material.color;
-            // 高亮選中棋子
             rend.material.color = Color.yellow;
-            Debug.Log($"{selectedPiece.gameObject.name} 被選中並高亮顯示");
         }
         DisplayAttackRange(piece);
         DisplayAvailableMoves(piece);
+        selectedPiece.IsSelected = true;
     }
 
     private AStarPathfinding GetAStar()
@@ -103,7 +100,6 @@ public class InputManager : MonoBehaviour
     {
         if (selectedPiece != null && IsCellInRange(cell))
         {
-            // 使用 A* 尋找路徑
             Vector2Int start = selectedPiece.gridPosition;
             Vector2Int target = cell.gridPosition;
             var (path, totalCost) = aStar.FindPath(start, target);
@@ -111,20 +107,8 @@ public class InputManager : MonoBehaviour
             if (path != null && path.Count > 1 && totalCost <= selectedPiece.movementRange)
             {
                 currentPath = path;
-                currentPathIndex = 1; // 路徑的第一個點是當前位置
+                currentPathIndex = 1;
                 isMoving = true;
-                Debug.Log($"路徑已找到，開始移動棋子，總成本: {totalCost}");
-            }
-            else
-            {
-                Debug.Log("路徑未找到或總成本超出移動範圍。");
-            }
-
-            GridCell currentCell = gridManager.GetGridCell(selectedPiece.gridPosition);
-
-            if (currentCell != null)
-            {
-                gridManager.MovePiece(currentCell, cell, selectedPiece);
             }
         }
     }
@@ -138,7 +122,6 @@ public class InputManager : MonoBehaviour
             if (rend != null)
             {
                 rend.material.color = originalChessPieceColor;
-                Debug.Log($"{selectedPiece.gameObject.name} 顏色恢復為 {originalChessPieceColor}");
             }
             // 刪除所有生成的高亮物件
             foreach (GameObject highlight in activeHighlights)
@@ -146,9 +129,8 @@ public class InputManager : MonoBehaviour
                 Destroy(highlight);
             }
             activeHighlights.Clear();
-
+            selectedPiece.IsSelected = false;
             selectedPiece = null;
-            //selectedCell = null;
         }
     }
 
@@ -166,7 +148,6 @@ public class InputManager : MonoBehaviour
                 GameObject highlight = Instantiate(moveHighlightPrefab, highlightPosition, Quaternion.identity);
                 activeHighlights.Add(highlight);
             }
-            Debug.Log($"顯示 {accessibleCells.Count} 個可移動格子");
         }
     }
 
@@ -208,87 +189,95 @@ public class InputManager : MonoBehaviour
         {
             GridCell targetCell = currentPath[currentPathIndex];
 
-            if (targetCell == null)
-            {
-                Debug.LogError("targetCell 是 null！");
-                isMoving = false;
-                currentPath.Clear();
-                return;
-            }
-
             if (selectedPiece == null)
             {
-                Debug.LogError("selectedPiece 是 null！");
                 isMoving = false;
                 currentPath.Clear();
                 return;
             }
 
+            // 目標位置，保留原本高度
             Vector3 targetPosition = targetCell.transform.position;
-            targetPosition.y = selectedPiece.transform.position.y; // 保留原有的 Y 軸位置
+            targetPosition.y = 1f;     // 保持 Y 軸不變
 
-            selectedPiece.transform.position = Vector3.MoveTowards(selectedPiece.transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            Debug.Log($"{selectedPiece.gameObject.name} 正在移動到 {targetPosition}");
+            // 逐步移動到目標位置
+            Vector3 currentPosition = selectedPiece.transform.position;
+            currentPosition.y = 1f; // 確保當前位置的 Y 軸也固定
 
-            if (Vector3.Distance(selectedPiece.transform.position, targetPosition) < 0.1f)
+            selectedPiece.transform.position = Vector3.MoveTowards(
+                currentPosition,
+                targetPosition,
+                moveSpeed * Time.deltaTime
+            );
+
+            // 確認是否抵達目標格子
+            if (Vector3.Distance(selectedPiece.transform.position, targetPosition) < 0.01f)
             {
-                selectedPiece.transform.position = targetPosition;
+                // 更新棋子的位置到目標格
+                selectedPiece.transform.position = new Vector3(targetPosition.x, 1f, targetPosition.z); // 強制修正
+
                 currentPathIndex++;
 
-                // 更新棋子的 gridPosition
-                selectedPiece.UpdateGridPosition(targetCell.gridPosition);
-                Debug.Log($"{selectedPiece.gameObject.name} 的 gridPosition 更新為 ({targetCell.gridPosition.x}, {targetCell.gridPosition.y})");
-
+                // 如果到達路徑的最後一個格子
                 if (currentPathIndex >= currentPath.Count)
                 {
+                    // 確保格子狀態正確更新
+                    GridCell previousCell = gridManager.GetGridCell(selectedPiece.gridPosition);
+                    GridCell targetGridCell = targetCell;
+
+                    // 更新棋子邏輯座標
+                    selectedPiece.gridPosition = targetGridCell.gridPosition;
+
+                    // 使用優化的狀態更新
+                    gridManager.ResetOccupiedCells(selectedPiece, previousCell);
+
                     isMoving = false;
+                    selectedPiece.hasMoved = true;
                     currentPath.Clear();
-                    Debug.Log("棋子已到達目標位置。");
-                    DeselectCurrentPiece(); // 在移動完成後取消選擇棋子
+                    DeselectCurrentPiece(); // 移動完成後取消選擇
                 }
             }
         }
-        /*else
-        {
-            if (!isMoving)
-            {
-                Debug.Log("isMoving 為 false，跳過 HandleMovement。");
-            }
-            if (currentPath == null)
-            {
-                Debug.Log("currentPath 是 null，跳過 HandleMovement。");
-            }
-            if (currentPathIndex >= (currentPath != null ? currentPath.Count : 0))
-            {
-                Debug.Log("currentPathIndex 超出範圍，跳過 HandleMovement。");
-            }
-        }*/
     }
 
     private void HandleCommands()
     {
-        if (selectedPiece != null)
+        if (selectedPiece != null && Input.GetKeyDown(KeyCode.Space) && isPlayerTurn && !isMoving)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (selectedPiece is Warrior warrior)
             {
-                // 嘗試攻擊
-                if (selectedPiece is Warrior warrior)
+                var enemy = warrior.DetectEnemy();
+                if (enemy != null)
                 {
-                    var enemy = warrior.DetectEnemy();
-                    if (enemy != null)
-                    {
-                        warrior.Attack(enemy);
-                    }
-                    else
-                    {
-                        Debug.Log("沒有可攻擊的敵人");
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning($"{selectedPiece.gameObject.name} 不是 Warrior，無法攻擊");
+                    warrior.Attack(enemy);
+                    DeselectCurrentPiece();
                 }
             }
+        }
+    }
+
+    private void OnTurnChanged(bool isPlayerTurn)
+    {
+        this.isPlayerTurn = isPlayerTurn;
+        if (!isPlayerTurn)
+            DeselectCurrentPiece();      // 清空所有選擇
+    }
+    private void EndTurn()
+    {
+        if (selectedPiece != null)
+        {
+            selectedPiece.hasMoved = true;
+            selectedPiece.IsSelected = false;
+        }
+        isPlayerTurn = false;
+        TurnManager.Instance.NotifyTurnChanged(); // 觸發回合變更通知
+    }
+
+    private void OnDestroy()
+    {
+        if (TurnManager.Instance != null)
+        {
+            TurnManager.Instance.OnTurnChanged -= OnTurnChanged;
         }
     }
 }
