@@ -55,40 +55,20 @@ public class AIController : MonoBehaviour
                 continue;
             }
 
-            // 檢查是否能攻擊到目標棋子
-            List<GridCell> attackRange = gridManager.GetAttackRange(aiPiece.gridPosition, aiPiece.attackRange);
-            GridCell targetCell = gridManager.GetGridCell(targetPiece.gridPosition);
-
-            if (attackRange.Contains(targetCell))
+            // 執行攻擊或移動行動
+            bool hasAttacked = TryAttack(aiPiece, targetPiece);
+            if (!hasAttacked)
             {
-                // 如果目標在攻擊範圍內，直接攻擊
-                Debug.Log($"{aiPiece.gameObject.name} 攻擊 {targetPiece.gameObject.name}。");
-                aiPiece.Attack(targetPiece);
-                aiPiece.hasMoved = true; // 標記為已行動
-            }
-            else
-            {
-                // 如果目標不在攻擊範圍內，嘗試移動到靠近目標的格子
-                List<GridCell> targetArea = GetTargetAreaAroundPiece(targetPiece, aiPiece.attackRange);
-
-                if (targetArea == null || targetArea.Count == 0)
+                bool hasMoved = TryMove(aiPiece, targetPiece);
+                if (hasMoved)
                 {
-                    Debug.LogWarning($"{targetPiece.gameObject.name} 周圍沒有可移動的格子。");
-                    continue;
-                }
-
-                // 找到最近的可移動目標格子
-                GridCell moveCell = FindClosestAccessibleCell(aiPiece.gridPosition, targetArea);
-                if (moveCell != null)
-                {
-                    Debug.Log($"{aiPiece.gameObject.name} 移動到 {moveCell.gridPosition}。");
-                    gridManager.MovePiece(gridManager.GetGridCell(aiPiece.gridPosition), moveCell, aiPiece);
-                }
-                else
-                {
-                    Debug.LogWarning($"{aiPiece.gameObject.name} 無法找到可行路徑。");
+                    // 移動後再嘗試攻擊
+                    TryAttack(aiPiece, targetPiece);
                 }
             }
+
+            // 標記該 AI 棋子已完成行動
+            aiPiece.hasMoved = true;
         }
 
         EndAITurn(); // 所有行動結束後，切換到玩家回合
@@ -161,6 +141,43 @@ public class AIController : MonoBehaviour
         }
 
         return closestCell;
+    }
+    private bool TryAttack(ChessPiece aiPiece, ChessPiece targetPiece)
+    {
+        List<GridCell> attackRange = gridManager.GetAttackRange(aiPiece.gridPosition, aiPiece.attackRange);
+        GridCell targetCell = gridManager.GetGridCell(targetPiece.gridPosition);
+
+        if (attackRange.Contains(targetCell))
+        {
+            // 如果目標在攻擊範圍內，執行攻擊
+            Debug.Log($"{aiPiece.gameObject.name} 攻擊 {targetPiece.gameObject.name}。");
+            aiPiece.Attack(targetPiece);
+            return true;
+        }
+        return false;
+    }
+    private bool TryMove(ChessPiece aiPiece, ChessPiece targetPiece)
+    {
+        // 獲取目標周圍可移動的格子
+        List<GridCell> targetArea = GetTargetAreaAroundPiece(targetPiece, aiPiece.attackRange);
+
+        if (targetArea == null || targetArea.Count == 0)
+        {
+            Debug.LogWarning($"{targetPiece.gameObject.name} 周圍沒有可移動的格子。");
+            return false;
+        }
+
+        // 找到最近的可移動目標格子
+        GridCell moveCell = FindClosestAccessibleCell(aiPiece.gridPosition, targetArea);
+        if (moveCell != null)
+        {
+            Debug.Log($"{aiPiece.gameObject.name} 移動到 {moveCell.gridPosition}。");
+            gridManager.MovePiece(gridManager.GetGridCell(aiPiece.gridPosition), moveCell, aiPiece);
+            return true;
+        }
+
+        Debug.LogWarning($"{aiPiece.gameObject.name} 無法找到可行路徑。");
+        return false;
     }
 
     private void EndAITurn()
